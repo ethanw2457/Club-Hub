@@ -37,7 +37,7 @@ body{
 }
 
 .contact-btn{
-  background-color:#FFED4F;
+  background-color:#fff59d;
   padding:0.2rem 1rem;
   border-radius:1rem;
   border:1px solid black;
@@ -134,13 +134,13 @@ svg{
   gap:1rem;
 }
 .yellow{
-  background-color:#FFED4F;
+  background-color:#fff59d;
 }
 .green{
-  background-color:#0DFFA8;
+  background-color:#00b8d4;
 }
 .violet{
-  background-color:#FFD9FE;
+  background-color:#fff59d;
 }
 
 .section-img > * {
@@ -267,7 +267,7 @@ svg{
 .container {
   position: relative;
   width: 100%;
-  background-color: #FFED4F;
+  background-color: #fff59d;
   min-height: 70vh;
   overflow: hidden;
 }
