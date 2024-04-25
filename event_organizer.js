@@ -22,5 +22,5 @@ document.getElementById("eventform").addEventListener("submit", function(event) 
   alert("Event added successfully!");
 
 
-  window.location.href = "./index.html";
+  window.location.href = "./carpoolHub.html";
 });

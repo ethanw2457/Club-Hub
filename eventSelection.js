@@ -10,7 +10,7 @@ document.getElementById("button").addEventListener("click", function(event) {
   else {
     localStorage.setItem("driver", localStorage.getItem("currentuser"));
     alert("Successfully signed up as a driver!");
-    window.location.href = "index.html";
+    window.location.href = "carpoolHub.html";
   }
 })
 
