@@ -9,9 +9,9 @@
   border: 1px solid #ccc;
 }
 :root {
-  --accent-color: #71dba7;
-  --background-color: #abc;
-  --background-color-2: #bc544d;
+  --accent-color: #00acc1;
+  --background-color: #fff59d;
+  --background-color-2: #00acc1;
   --light-grey: rgb(194, 194, 194);
   --border-radius: 30px;
 }

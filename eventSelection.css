@@ -10,8 +10,8 @@ h1,h2,h3 {
 }
 
 body {
-  border-left: 10px solid yellow;
-  border-right: 10px solid yellow;
+  border-left: 10px solid #fff59d;
+  border-right: 10px solid #fff59d;
 }
 
 li,a,p,button {
