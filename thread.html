@@ -1,0 +1,145 @@
+<body> 
+    <div class="top-bar">
+        <h1> 
+            My Forum
+        </h1>
+    </div>
+    <div class="main">
+    <div class="header" >
+        <h4 class="title">
+            Thread 1
+        </h4>
+        <div class="bottom" >
+            <p class="timestamp" >
+                10/10/20
+            </p>
+            <p class=" comment-count">
+                4 comments
+            </p>
+            
+        </div>
+    </div>
+    <textarea> </textarea>
+    <button>add comment</button>
+        <div class="comments" >
+            <div class="comment" >
+                <div class="top-comment" >
+                    <p class="user">
+                        Andy
+                    </p>
+                    <p class= "comment-ts">
+                        4/24/24
+                    </p>
+                </div>
+                <div class="comment-content">
+                    Comment text here
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="data.js"></script>
+    <script>
+        console.log(threads);
+        var id = window.location.search.slice(1);
+        var thread= threads.find(t => t.id == id);
+        var header = document.querySelector('.header');
+        var headerHtml = `
+        <h4 class="title">
+            ${thread.title}
+        </h4>
+        <div class="bottom" >
+            <p class="timestamp" >
+                ${new Date(thread.date).toLocaleString}
+            </p>
+            <p class=" comment-count">
+                ${thread.comments.length} comments
+            </p>
+            
+        </div>
+        `
+        header.insertAdjacentHTML('beforeend', headerHtml)
+
+        function addComment(comment) {
+            var commentHtml = `
+                <div class="comment" >
+                    <div class="top-comment" >
+                        <p class="user">
+                            ${comment.author}
+                        </p>
+                        <p class= "comment-ts">
+                            ${new Date(comment.date).LocaleString}
+                        </p>
+                    </div>
+                    <div class="comment-content">
+                        ${comment.content}
+                    </div>
+                </div>
+            `
+            comments.insertAdjacentHTML('beforeend', commentHtml);
+        }
+        var comments = document.querySelector('.comments');
+        for (let comment of thread.comments) {
+            addComment(comment);
+        }
+
+        var btn= document.querySelector('button;');
+        btn.addEventListener('click', function() {
+            var txt= document.querySelector('textarea');
+            var comment = {
+                content: txt.value,
+                date: Date.now(),
+                author: 'Aaron'
+            }
+            addComment(comment);
+        })
+    </script>
+    <style> 
+        body {
+            margin: 10px 60px;
+        }
+        a {
+            text-decoration: none;
+            color: black;
+        }
+        h1, h4, ol {
+            margin: 0; 
+        }
+        p {
+            margin: 5px 0;
+        }
+        textarea {
+            width: 80%;
+            height 80px;
+        }
+        button {
+            display: block;
+            margin: 10px 0;
+        }
+        .top-bar {
+            background-color: lightblue;
+            padding: 0 40px;
+        }
+        .main {
+            background-color: #f6f6ef
+            padding: 10px 40px; 
+        }
+        .comments {
+            margin: 40px 0;
+        }
+        .comment {
+            margin: 10px 0;
+        }
+        .row {
+            padding: 5px 0; 
+        }
+        .bottom, .top-comment {
+            display: flex; 
+            color: grey
+            font-size: 12px;
+        }
+        .timestamp {
+            padding-right: 10px; 
+        }
+    
+    </style>
+</body>
