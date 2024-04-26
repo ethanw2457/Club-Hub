@@ -5,12 +5,12 @@ document.getElementById("description").innerHTML = "Description of Event: " + lo
 document.getElementById("button").addEventListener("click", function(event) {
   event.preventDefault();
   if (localStorage.getItem("driver") !== null) {
-    window.location.href = "eventReceipt.html";
+    window.location.href = "Transport/eventReceipt.html";
   }
   else {
     localStorage.setItem("driver", localStorage.getItem("currentuser"));
     alert("Successfully signed up as a driver!");
-    window.location.href = "carpoolHub.html";
+    window.location.href = "Transport/carpoolHub.html";
   }
 })
 

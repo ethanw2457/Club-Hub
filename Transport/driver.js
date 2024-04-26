@@ -29,5 +29,5 @@ document.getElementById("loginform").addEventListener("submit", function(event) 
   //localStorage.clear();
   // Assume AJAX call to send login info to server and save in database
   // Redirect to another page after successful login
-  window.location.href = "/eventSelection.html"; // Redirect to event selection page
+  window.location.href = "eventSelection.html"; // Redirect to event selection page
 });
