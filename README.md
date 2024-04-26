@@ -2,7 +2,7 @@
 Revolutionizing the education experience for students
 
 Created for SummitHacks 2024
-https://devpost.com
+[https://devpost.com](https://summit.devpost.com/)
 
 ## 📊Profile Wide Statistics📊
 
