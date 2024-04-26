@@ -1,8 +1,7 @@
 # Club-Hub
 Revolutionizing the education experience for students
 
-Created for SummitHacks 2024
-[SummitHacks 2024](https://summit.devpost.com/)
+Created for [SummitHacks 2024](https://summit.devpost.com/)
 
 ## 📊Profile Wide Statistics📊
 
