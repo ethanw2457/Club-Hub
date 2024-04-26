@@ -8,8 +8,8 @@ https://devpost.com
 
 ![Your Repository's Stats](https://github-readme-stats.vercel.app/api?username=ethanw2457&show_icons=true)
 ![Your Repository's Stats](https://github-readme-stats.vercel.app/api?username=shamuyhank&show_icons=true)
-![Your Repository's Stats](https://github-readme-stats.vercel.app/api?username=ethanw2457&show_icons=true)
-![Your Repository's Stats](https://github-readme-stats.vercel.app/api?username=shamuyhank&show_icons=true)
+![Your Repository's Stats](https://github-readme-stats.vercel.app/api?username=urtleturtle&show_icons=true)
+![Your Repository's Stats](https://github-readme-stats.vercel.app/api?username=athul16&show_icons=true)
 
 
 
