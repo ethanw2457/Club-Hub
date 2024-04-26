@@ -36,7 +36,7 @@ body {
 }
 
 
-.rental-card {
+.snack-card {
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -97,9 +97,9 @@ h1::after {
 }
 
 
-/* Rentals */
+/* Snacks */
 
-#rental-form {
+#snack-form {
   background-color: #f8f9fa;
   padding: 20px;
   border-radius: 10px;
