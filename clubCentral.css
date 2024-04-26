@@ -250,8 +250,8 @@ body {
 .panel img.home-bike {
   bottom: 0;
   right: 0;
-  height: 95%;
-  width: 95%;
+  height: 99%;
+  width: 99%;
   z-index: 3;
   animation-name: home-bike-move;
   animation-delay: 1.7s;
@@ -267,7 +267,9 @@ body {
 
 .panel img.home-boxes {
   bottom: 0;
-  right: 0;
+  right: 15;
+  height: 90%;
+  width: 90%;
   z-index: 2;
   animation-name: home-boxes-move;
   animation-delay: 2.3s;
