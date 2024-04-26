@@ -208,7 +208,9 @@ body {
 
 .panel img.home-lamp {
   top: 0px;
-  left: 55px;
+  left: 20px;
+  height: 90%;
+  width: 90%;
   z-index: 1;
   animation-name: home-lamp-move;
   animation-delay: 1s;
