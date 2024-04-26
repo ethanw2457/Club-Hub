@@ -1,0 +1,95 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Didact Gothic', sans-serif;
+}
+body{
+    background: #363a45;
+}
+.title{
+    color:whitesmoke;
+    text-align: center;
+    font-size: 3.2rem;
+    letter-spacing: 1rem;
+    margin-top: 2rem;
+}
+
+.inputSection {
+    margin-top: 2.5rem;
+    display: flex;
+    justify-content: center;
+}
+ .inputSection input {
+    width: 500px;
+    text-align: center;
+    padding: .4rem 0 .3rem 0;
+    border-radius: 1rem;
+    border: 1.5px solid black;
+ }
+.inputSection button {
+    width: 45px;
+    margin-left: .5rem;
+    background-color: #679e63;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 0 5px 0 #50894a;
+}
+
+
+.container {
+    background-color:rgb(43, 43, 43);
+    width: 550px;
+    margin: auto;
+    margin-top: 2.5rem;
+    padding: 2rem 3rem 3rem 3rem;
+}
+.sub-caption{
+    text-align: center;
+    color: white;
+    margin-top: .5rem;
+    letter-spacing: .2rem;
+    /* text-decoration: underline; */
+}
+#myUL {
+    list-style:none;
+
+}
+.item-container {
+    text-transform: capitalize;
+    background-color: white;
+    margin-top: 1.6rem;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    transition: all .2s ease-in-out;
+}
+.item-container:hover{
+    transform: scale(1.1);
+}
+.item{
+    margin-right: auto;
+    font-size: 1.1rem;
+}
+.doneBtn, .delBtn {
+    padding: .3rem;
+}
+.doneBtn {
+    margin-right: .5rem;
+    background-color:  #2c7ec2;
+    color: white;
+    border: none;
+    border-radius: 3px;
+}
+.delBtn {
+    background-color: #ff6465;
+    color:white;
+    border: none;
+    border-radius: 4px;
+    padding: 0 .5rem 0 .5rem;
+}
+.done {
+    text-decoration: line-through;
+    text-decoration-thickness: 0.25rem;
+}
