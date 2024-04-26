@@ -5,57 +5,53 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
-  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <!-- Main -->
   <div class="container mt-4">
-    <h1>Bicycle Rental!</h1>
-    <p>Rent a bicycle and explore the city.</p>
+    <h1>Snack Ranking</h1>
+    <p>Vote for your favorite snacks!</p>
 
     <!-- Rental Form -->
     <form id="rental-form">
       <div class="row">
         <div class="col-md-4 mb-3">
-          <label for="name" class="form-label">Name</label>
+          <label for="name" class="form-label">Snack Name</label>
           <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
         </div>
         <div class="col-md-4 mb-3">
-          <label for="email" class="form-label">Email address</label>
-          <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+          <label for="address" class="form-label">Vendor Address</label>
+          <input type="text" class="form-control" id="address" placeholder="Enter vendor address" required>
         </div>
+
         <div class="col-md-4 mb-3">
-          <label for="destination" class="form-label">Destination</label>
-          <select class="form-select" id="destination" required>
-            <option selected disabled>Select your destination</option>
-            <option value="1">City Tour</option>
-            <option value="2">Mountain Trail</option>
-            <option value="3">Beach Ride</option>
-          </select>
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" id="description" placeholder="Enter your description" required></textarea>
         </div>
+
       </div>
       <div class="row">
         <div class="col-md-4 mb-3">
-          <label for="bike" class="form-label">Bike Type</label>
+          <label for="bike" class="form-label">Snack Type</label>
           <select class="form-select" id="bike" required>
-            <option selected disabled>Select a bike</option>
-            <option value="1">Mountain Bike</option>
-            <option value="2">Road Bike</option>
-            <option value="3">City Bike</option>
+            <option selected disabled>Select a type</option>
+            <option value="1">Chips</option>
+            <option value="2">Baked Good</option>
+            <option value="3">Candy</option>
           </select>
         </div>
         <div class="col-md-4 mb-3">
           <label for="price" class="form-label">Price Range</label>
           <select class="form-select" id="price" required>
             <option selected disabled>Select a price range</option>
-            <option value="1">$10 - $20</option>
-            <option value="2">$20 - $30</option>
-            <option value="3">$30 - $40</option>
+            <option value="1">$1 - $5</option>
+            <option value="2">$6 - $10</option>
+            <option value="3">$11 - $20</option>
           </select>
         </div>
         <div class="col-md-4">
-          <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-bicycle me-2"></i>Rent Now</button>
+          <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-bicycle me-2"></i>Suggest Snack</button>
         </div>
       </div>
     </form>
@@ -63,16 +59,16 @@
     <!-- Submission Result -->
     <div class="submission-result">
       <h3>Congratulations!</h3>
-      <p>Thank you for your rental submission. Please wait for our team to contact you shortly.</p>
+      <p>Thank you for your snack submission! Your snack is ready to be voted for!</p>
     </div>
 
-    <!-- Bicycle Photos -->
+    <!-- Snack Option Photos -->
     <div class="row mt-4">
       <div class="col-md-4">
         <div class="rental-card">
-          <img src="https://www.herocycles.com/on/demandware.static/-/Sites-HeroCycles-Library/default/dweac805fd/PLP/Topbanner/MTB.jpg" class="img-fluid" alt="Mountain Bike">
+          <img src="https://media2.giphy.com/media/UVkD0VslfkuIkENji5/200w.gif?cid=6c09b952wu2xou7j8vt4hudhx51q9ibl0cbm9wfwqd6l8q3p&ep=v1_gifs_search&rid=200w.gif&ct=g" class="img-fluid" alt="Snack">
           <div class="card-body">
-            <h5 class="card-title">Mountain Bike</h5>
+            <h5 class="card-title">Lays Chips</h5>
             <p class="card-text">Perfect for adventurous trails.</p>
             <a href="#" class="btn btn-primary bike-details-toggle" data-bike="mountain-bike"><i class="fas fa-info-circle me-2"></i>Details</a>
             <div class="bike-details" id="mountain-bike-details">
