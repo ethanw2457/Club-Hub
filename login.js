@@ -13,7 +13,7 @@ sign_in_btn.addEventListener('click', () =>{
 
 // the below is not used but for reference
 document.getElementById("signupform").addEventListener("submit", function(event) {
-  event.preventDefault(); 
+  event.preventDefault();
 
   const name = document.getElementById("signupname").value.trim();
   const email = document.getElementById("email").value.trim();
@@ -42,7 +42,7 @@ document.getElementById("signupform").addEventListener("submit", function(event)
   //localStorage.clear();
   // Assume AJAX call to send login info to server and save in database
   // Redirect to another page after successful login
-  window.location.href = "/eventSelection.html"; // Redirect to event selection page
+  window.location.href = "clubCentral.html"; // Redirect to event selection page
 });
 
 document.getElementById("signinform").addEventListener("submit", function(event) {
@@ -69,7 +69,7 @@ document.getElementById("signinform").addEventListener("submit", function(event)
   }
   else {
     localStorage.setItem("currentuser", i);
-    window.location.href = "./eventSelection.html";
+    window.location.href = "clubCentral.html";
 
     //document.getElementById("result").innerHTML = localStorage.getItem("user1");
 
