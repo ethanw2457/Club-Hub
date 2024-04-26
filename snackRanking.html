@@ -1,0 +1,117 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bicycle Rental</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Main -->
+  <div class="container mt-4">
+    <h1>Bicycle Rental!</h1>
+    <p>Rent a bicycle and explore the city.</p>
+
+    <!-- Rental Form -->
+    <form id="rental-form">
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="name" class="form-label">Name</label>
+          <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" class="form-control" id="email" placeholder="name@example.com" required>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="destination" class="form-label">Destination</label>
+          <select class="form-select" id="destination" required>
+            <option selected disabled>Select your destination</option>
+            <option value="1">City Tour</option>
+            <option value="2">Mountain Trail</option>
+            <option value="3">Beach Ride</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="bike" class="form-label">Bike Type</label>
+          <select class="form-select" id="bike" required>
+            <option selected disabled>Select a bike</option>
+            <option value="1">Mountain Bike</option>
+            <option value="2">Road Bike</option>
+            <option value="3">City Bike</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="price" class="form-label">Price Range</label>
+          <select class="form-select" id="price" required>
+            <option selected disabled>Select a price range</option>
+            <option value="1">$10 - $20</option>
+            <option value="2">$20 - $30</option>
+            <option value="3">$30 - $40</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <button type="submit" class="btn btn-primary mt-4"><i class="fas fa-bicycle me-2"></i>Rent Now</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- Submission Result -->
+    <div class="submission-result">
+      <h3>Congratulations!</h3>
+      <p>Thank you for your rental submission. Please wait for our team to contact you shortly.</p>
+    </div>
+
+    <!-- Bicycle Photos -->
+    <div class="row mt-4">
+      <div class="col-md-4">
+        <div class="rental-card">
+          <img src="https://www.herocycles.com/on/demandware.static/-/Sites-HeroCycles-Library/default/dweac805fd/PLP/Topbanner/MTB.jpg" class="img-fluid" alt="Mountain Bike">
+          <div class="card-body">
+            <h5 class="card-title">Mountain Bike</h5>
+            <p class="card-text">Perfect for adventurous trails.</p>
+            <a href="#" class="btn btn-primary bike-details-toggle" data-bike="mountain-bike"><i class="fas fa-info-circle me-2"></i>Details</a>
+            <div class="bike-details" id="mountain-bike-details">
+              <p>Trek trail bikes are your do-more ride. They're versatile, light, and exceedingly capable, climbing as well as they descend, conquering trails from the Dolomites to Durango. They're the right bike for anything from a quick stint on the trails to a brutal day of racing. </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rental-card">
+          <img src="https://dqh479dn9vg99.cloudfront.net/wp-content/uploads/sites/9/2023/03/3t-strada-review-1-970x646.jpg" class="img-fluid" alt="Road Bike">
+          <div class="card-body">
+            <h5 class="card-title">Road Bike</h5>
+            <p class="card-text">Ideal for long distance rides.</p>
+            <a href="#" class="btn btn-primary bike-details-toggle" data-bike="road-bike"><i class="fas fa-info-circle me-2"></i>Details</a>
+            <div class="bike-details" id="road-bike-details">
+              <p>Conquer serious rides with performance road bikes that combine innovative materials and construction with top-line spec for unparalleled performance on road, gravel, and everything in between. Light and aero, stable and capable, Trek’s performance road line offers refined machines that ride to win.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="rental-card">
+          <img src="https://www.brooklynbicycleco.com/cdn/shop/files/Screenshot_2023-03-09_193412.jpg?v=1678408476" class="img-fluid" alt="City Bike">
+          <div class="card-body">
+            <h5 class="card-title">City Bike</h5>
+            <p class="card-text">Great for exploring the city streets.</p>
+            <a href="#" class="btn btn-primary bike-details-toggle" data-bike="city-bike"><i class="fas fa-info-circle me-2"></i>Details</a>
+            <div class="bike-details" id="city-bike-details">
+              <p>Commuter bikes are sought after for their versatility as well as their ability to get you and your cargo where you need to go. Whether you are riding to work, running errands, or pedaling to the local watering hole, we love commuter bikes for discovering those simple pleasures buried in your daily grind.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="snackRanking.js"></script>
+  <link rel="stylesheet" type="text/css" href="snackRanking.css" />
+</body>
+
