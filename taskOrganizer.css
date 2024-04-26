@@ -4,7 +4,7 @@
     font-family: 'Didact Gothic', sans-serif;
 }
 body{
-    background: #363a45;
+    background: #00acc1;
 }
 .title{
     color:whitesmoke;
@@ -59,7 +59,7 @@ body{
     text-transform: capitalize;
     background-color: white;
     margin-top: 1.6rem;
-    border: 2px solid black;
+    border: 2px solid #171717;
     display: flex;
     justify-content: center;
     padding: 1rem;
