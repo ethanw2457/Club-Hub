@@ -16,23 +16,24 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 const storage = getStorage(app);
-$(document).ready(function () {
-  $("#resp-menu").click(function () {
-    $(".menu").show();
-    $(".biz_header_overlay").show();
-    $(".menu_close").show();
-  });
-  $(".menu_close").click(function () {
-    $(".menu").hide();
-    $(".biz_header_overlay").hide();
-  });
-  $(".biz_header_overlay").click(function () {
-    $(".menu").hide();
-    $(".menu_close").hide();
-    $(".biz_header_overlay").hide();
-  });
-});
+// $(document).ready(function () {
+//   $("#resp-menu").click(function () {
+//     $(".menu").show();
+//     $(".biz_header_overlay").show();
+//     $(".menu_close").show();
+//   });
+//   $(".menu_close").click(function () {
+//     $(".menu").hide();
+//     $(".biz_header_overlay").hide();
+//   });
+//   $(".biz_header_overlay").click(function () {
+//     $(".menu").hide();
+//     $(".menu_close").hide();
+//     $(".biz_header_overlay").hide();
+//   });
+// });
 
 document.getElementById("sign-out").addEventListener('click', signOut);
 
@@ -50,10 +51,9 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
 
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+
 // Initialize Realtime Database and get a reference to the service
-const db = getDatabase(app);
-const storage = getStorage(app);
+
 
 const container = document.getElementById('container');
 
