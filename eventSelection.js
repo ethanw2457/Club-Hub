@@ -32,29 +32,33 @@ snapshot.forEach((childSnapshot) => {
     // Access the id attribute of the target element
     const id = event.target.id.charAt(event.target.id.length - 1).toString();
     if (event.target.id.includes("driver")) {
-      snapshot = await get(child(ref(db), 'events/' + id + '/driver'));
-      if (snapshot.exists()) {
+      const driver = await get(child(ref(db), 'events/' + id + '/driver'));
+      if (driver.exists() && driver.val() != "") {
         alert("There is already a driver for this event.");
         return;
       }
       else {
-        await update(ref(db, 'events/' + id + '/driver'), {
-          driver: sessionStorage.getItem("currentUser");
-        })
-        window.location.href = '/Transport/eventReceipt.html?event=' + id;
+        await update(ref(db, 'events/' + id), {
+          driver: sessionStorage.getItem("currentUser")
+        });
       }
     }
     else {
-      get(child(ref(db), 'events/' + id)).then((snapshot) => {
+      await get(child(ref(db), 'events/' + id)).then((snapshot) => {
         // Get the current array data from the snapshot
-        const currentArray = snapshot.val() || [];
+        const currentArray = snapshot.val().carpoolers || [];
 
         // Iterate through the array items
-        currentArray.forEach((item, index) => {
-          console.log('Item ' + index + ':', item);
+        currentArray.push(sessionStorage.getItem("currentUser"));
+
+        // Set the modified array back to the database
+        update(ref(db, "events/" + id), {
+          carpoolers: currentArray
         });
+
         });
     }
+    window.location.href = '/Transport/eventReceipt.html?event=' + id;
   });
   
   // Create and append the image element
