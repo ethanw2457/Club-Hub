@@ -62,16 +62,14 @@ document.getElementById("signupform").addEventListener("submit", function(event)
     return;
   }
   var i = 1;
-  get(child(ref(db), 'users')).then((snapshot) => {
-    if (snapshot.exists()) {
-      console.log(snapshot.val()["1"]);
-      //document.getElementById("hi").innerHTML = snapshot.val().username.replace(/\n/g, "<br>");;
-    } else {
-      console.log("No data available");
-    }
-  }).catch((error) => {
-    console.error(error);
-  });
+  while (true) {
+    get(child(ref(db), 'users/' + i)).then((snapshot) => {
+      if (snapshot.exists()) {
+        continue
+      } else {
+        console.log("No data available");
+      }
+    })
   // while (localStorage.getItem("user" + i) !== null) {
   //   i++;
   // }
