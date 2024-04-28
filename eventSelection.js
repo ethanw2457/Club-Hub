@@ -27,7 +27,6 @@ snapshot.forEach(async (childSnapshot) => {
   childSnapshot.child('username').val()
   // Create the parent container div
   const latestGridItem = document.createElement('div');
-  latestGridItem.id = eventId;
   latestGridItem.classList.add('latest-grid-item');
   
   await getDownloadURL(sref(storage, 'events/' + eventId))
@@ -45,6 +44,7 @@ snapshot.forEach(async (childSnapshot) => {
   const hr = document.createElement('hr');
   const descriptionParagraph = document.createElement('p');
   const buttonContainer = document.createElement('span');
+  buttonContainer.id = eventId;
   const firstButton = document.createElement('button');
   firstButton.textContent = "Drive";
   firstButton.id = "driver" + eventId;
@@ -54,7 +54,7 @@ snapshot.forEach(async (childSnapshot) => {
   buttonContainer.appendChild(firstButton);
   buttonContainer.appendChild(secondButton);
   
-  get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
+  await get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
     if (snapshot.exists()) {
       nameHeading.textContent = snapshot.val().name;
       latestGridItem.appendChild(nameHeading);
@@ -83,16 +83,16 @@ snapshot.forEach(async (childSnapshot) => {
       }
     }
     else {
-      await get(child(ref(db), 'events/' + id)).then((snapshot) => {
+      await get(child(ref(db), 'events/' + id)).then(async (snapshot) => {
         // Get the current array data from the snapshot
         const currentArray = snapshot.val().carpoolers || [];
-
+        console.log(currentArray);
         // Iterate through the array items
         currentArray.push(sessionStorage.getItem("currentUser"));
 
         // Set the modified array back to the database
-        update(ref(db, "events/" + id), {
-          carpoolers: currentArray
+        await update(ref(db, "events/" + id), {
+          'carpoolers': currentArray
         });
 
         });
