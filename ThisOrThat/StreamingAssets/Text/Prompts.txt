@@ -1,0 +1,36 @@
+Which food do you prefer?
+Pizza,Pasta,Sushi,Cake,Hamburger,Tacos,Fried,Chicken,Steak,Ramen,Burritos,Ice Cream,Sushi,Lasagna,Sandwiches,Curry,Chocolate,Dim Sum,BBQ Ribs,Pancakes,Lobster
+Which hobby do you prefer?
+Reading,Writing,Drawing,Painting,Photography,Gardening,Knitting,Crocheting,Woodworking,Cooking,Baking,Playing an Instrument,DIY Projects,Collecting,Running,Hiking,Fishing,Camping,Chess,Puzzle-solving
+Which class do you prefer?
+Math,English,History,Science,Art,Physical Education,Music,Computer Science,Foreign Language,Physics
+Which color do you prefer?
+Red,Blue,Green,Yellow,Orange,Purple,Black,White,Pink,Gray
+Which movie genre do you prefer?
+Action, Comedy, Drama, Horror, Science Fiction, Romance, Thriller, Adventure, Fantasy, Documentary
+Which vacation destination would you choose?
+Beach resort, Mountain retreat, European city tour, Safari in Africa, Tropical island getaway, Cultural exploration in Asia, Road trip across a country, Ski resort, Cruise vacation, Backpacking trip
+Which type of pet would you prefer?
+Dog, Cat, Fish, Bird, Hamster, Rabbit, Turtle, Guinea pig, Snake, Lizard
+Which musical genre do you prefer?
+Pop, Rock, Hip-hop, Jazz, Classical, Country, Electronic, R&B, Blues, Reggae
+Which season is your favorite?
+Spring, Summer, Autumn/Fall, Winter
+Which mode of transportation do you prefer?
+Car, Bicycle, Walking, Public transport (bus/train), Motorbike, Skateboard, Rollerblades, Scooter, Segway, Horseback riding
+Which type of footwear do you prefer?
+Sneakers, Boots, Sandals, High heels, Flats, Loafers, Flip-flops, Espadrilles, Slippers, Oxfords
+Which social media platform do you prefer?
+Facebook, Instagram, Twitter, TikTok, Snapchat, LinkedIn, Pinterest, Reddit, YouTube, Tumblr
+Which type of weather do you prefer?
+Sunny, Rainy, Snowy, Cloudy, Windy, Foggy, Stormy, Clear skies, Misty, Hail
+Which type of dessert do you prefer?
+Chocolate cake, Apple pie, Ice cream, Cheesecake, Brownies, Cupcakes, Fruit tart, Tiramisu, Pudding, Cookies
+Which gaming console do you prefer?
+PlayStation, Xbox, Nintendo Switch, PC, Mobile phone, Retro consoles, Virtual Reality, Handheld gaming device, Arcade machine
+Which type of exercise do you prefer?
+Running, Weightlifting, Yoga, Swimming, Cycling, Pilates, Martial arts, Zumba, Dancing
+Which type of book do you prefer?
+Mystery, Fantasy, Romance, Science Fiction, Thriller, Historical Fiction, Non-fiction, Biography, Self-help, Horror
+Which type of fruit do you prefer?
+Apple, Banana, Orange, Strawberry, Grape, Pineapple, Watermelon, Kiwi, Mango, Peach
