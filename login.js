@@ -59,7 +59,7 @@ document.getElementById("signupform").addEventListener("submit", async function(
   const address = document.getElementById("address").value.trim();
 
   
-  if (username === "" || email === "" || password === "" || address === "") {
+  if (name === "" || username === "" || email === "" || password === "" || address === "") {
     alert("Please fill in all fields.");
     return;
   }
@@ -82,7 +82,8 @@ document.getElementById("signupform").addEventListener("submit", async function(
       i++;
     } else {
       await set(ref(db, 'users/' + i), {
-        name: username,
+        name: name,
+        username: username,
         email: email,
         profile_picture: password
       });
