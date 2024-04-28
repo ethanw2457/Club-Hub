@@ -56,7 +56,7 @@ document.getElementById("signupform").addEventListener("submit", async function(
     alert("Please fill in all fields.");
     return;
   }
-  if (imageUploadInput.files.length != 1) {
+  if (imageUploadInput.files.length === 0) {
     alert("Please upload a profile picture.");
     return;
   }
