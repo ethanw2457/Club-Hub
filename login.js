@@ -146,7 +146,7 @@ document.getElementById("signinform").addEventListener("submit", async function(
   else {
     sessionStorage.setItem("currentUser", i);
     const urlParams = new URLSearchParams(window.location.search);
-    window.location.href = urlParams.get('redirect');
+    window.location.href = urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';
 
     //document.getElementById("result").innerHTML = localStorage.getItem("user1");
 
