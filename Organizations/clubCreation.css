@@ -2,12 +2,12 @@
 /* ==============================================Start of Header Package==============================================*/
 .section1 {
   position: absolute;
-  top: 0; /* Make sure the parent container is positioned */
+  top: 0; 
 }
 
 .section2 {
-  position: absolute; /* Position the element absolutely */
-  top: 150px; /* Position it at the top of the parent container */
+  position: absolute; 
+  top: 150px; 
 }
 
 \ img {

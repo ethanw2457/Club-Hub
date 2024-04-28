@@ -61,7 +61,7 @@ snapshot.forEach((childSnapshot) => {
     }
     window.location.href = '/Transport/eventReceipt.html?event=' + id;
   });
-  await getDownloadURL(sref(storage, 'events/' + eventId))
+  getDownloadURL(sref(storage, 'events/' + eventId))
   .then((url) => {
 
     // Or inserted into an <img> element
@@ -86,7 +86,7 @@ snapshot.forEach((childSnapshot) => {
   buttonContainer.appendChild(firstButton);
   buttonContainer.appendChild(secondButton);
   
-  await get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
+  get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
     if (snapshot.exists()) {
       nameHeading.textContent = snapshot.val().name;
       latestGridItem.appendChild(nameHeading);
