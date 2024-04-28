@@ -86,13 +86,12 @@ snapshot.forEach(async (childSnapshot) => {
       await get(child(ref(db), 'events/' + id)).then(async (snapshot) => {
         // Get the current array data from the snapshot
         const currentArray = snapshot.val().carpoolers || [];
-        console.log(currentArray);
         // Iterate through the array items
         currentArray.push(sessionStorage.getItem("currentUser"));
 
         // Set the modified array back to the database
         await update(ref(db, "events/" + id), {
-          'carpoolers': currentArray
+          carpoolers: currentArray
         });
 
         });
