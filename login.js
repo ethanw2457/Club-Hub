@@ -85,7 +85,7 @@ document.getElementById("signupform").addEventListener("submit", async function(
         name: name,
         username: username,
         email: email,
-        profile_picture: password
+        password: password
       });
       done = true;
     }
@@ -104,30 +104,32 @@ document.getElementById("signupform").addEventListener("submit", async function(
   window.location.href = urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';
 });
 
-document.getElementById("signinform").addEventListener("submit", function(event) {
+document.getElementById("signinform").addEventListener("submit", async function(event) {
   event.preventDefault(); 
 
-  const name = document.getElementById("signinname").value.trim();
+  const username = document.getElementById("signinusername").value.trim();
   const password = document.getElementById("signinpassword").value.trim();
 
-  if (name === "" || password === "") {
+  if (username === "" || password === "") {
     alert("Please fill in all fields.");
     return;
   }
-  var i = 1;
-  while (localStorage.getItem("user" + i) !== null && localStorage.getItem("user"+i) != name) {
-    i++;
-  }
-  if (localStorage.getItem("user" + i) === null) {
-    alert("Invalid username or password.");
-    return;
-  }
-  else if (localStorage.getItem("password" + i) != password) {
-    alert("Invalid username or password.");
+  var passwordCorrect = false;
+  var i = "";
+  var snapshot = await get(child(ref(db), 'users/'));
+  snapshot.forEach((childSnapshot) => {
+    if (childSnapshot.child('username').val() == username && childSnapshot.child('password').val() == password) {
+      passwordCorrect = true;
+      i = childSnapshot.key;
+    }
+  });
+  
+  if (!passwordCorrect) {
+    alert("Invalid username or password");
     return;
   }
   else {
-    localStorage.setItem("currentuser", i);
+    sessionStorage.setItem("currentUser", i);
     const urlParams = new URLSearchParams(window.location.search);
     window.location.href = urlParams.get('redirect');
 
