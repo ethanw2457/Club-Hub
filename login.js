@@ -23,17 +23,21 @@ sign_in_btn.addEventListener('click', () =>{
     container.classList.remove("sign-up-mode");
 });
 
-const suUser = document.getElementById('submit1');
-const submitButton2 = document.getElementById('submit2');
+const creatorSubmit = document.getElementById('asCreator');
 
 // Flags to track which button was clicked
-let buttonClicked = '';
+let asCreator = false;
 
 // Add click event listeners to the submit buttons
-submitButton1.addEventListener('click', () => {
-  buttonClicked = 'submit1';
+creatorSubmit.addEventListener('click', () => {
+  asCreator = true;
 });
 
+/*const sn = get(child(ref(db), "users/1")).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(!snapshot.val().creator);
+    }
+});*/
 
 // the below is not used but for reference
 document.getElementById("signupform").addEventListener("submit", async function(event) {
@@ -45,11 +49,15 @@ document.getElementById("signupform").addEventListener("submit", async function(
   const password = document.getElementById("signuppassword").value.trim();
   const address = document.getElementById("address").value.trim();
   const phone = document.getElementById("phonenumber").value.trim();
-
+  const imageUploadInput = document.getElementById('imageUpload');
 
   
   if (name === "" || username === "" || email === "" || password === "" || address === "") {
     alert("Please fill in all fields.");
+    return;
+  }
+  if (imageUploadInput.files.length != 1) {
+    alert("Please upload a profile picture.");
     return;
   }
 
@@ -76,7 +84,8 @@ document.getElementById("signupform").addEventListener("submit", async function(
         email: email,
         password: password,
         address: address,
-        phone: phone
+        phone: phone,
+        creator: asCreator
       });
       done = true;
     }
