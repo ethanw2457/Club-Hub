@@ -100,12 +100,10 @@ document.getElementById("signupform").addEventListener("submit", async function(
       done = true;
     }
   }
-  const storageRef = sref(storage, 'images/');
+  const storageRef = sref(storage, 'profiles/user' + i);
   const file = imageUploadInput.files[0];
   // 'file' comes from the Blob or File API
-  await uploadBytes(storageRef, file).then((snapshot) => {
-    console.log('Uploaded a blob or file!');
-  });
+  await uploadBytes(storageRef, file);
   //uploadBytes(storageRef, imageUploadInput.files[0]);
   sessionStorage.setItem("currentUser", i);
   // while (localStorage.getItem("user" + i) !== null) {
