@@ -60,7 +60,7 @@ snapshot.forEach((childSnapshot) => {
     }
     window.location.href = '/Transport/eventReceipt.html?event=' + id;
   });
-  await getDownloadURL(sref(storage, 'events/' + sessionStorage.getItem("currentUser")))
+  await getDownloadURL(sref(storage, 'events/' + eventId))
   .then((url) => {
 
     // Or inserted into an <img> element
@@ -77,42 +77,41 @@ snapshot.forEach((childSnapshot) => {
   const descriptionParagraph = document.createElement('p');
   const buttonContainer = document.createElement('span');
   const firstButton = document.createElement('button');
+  firstButton.textContent = "Drive";
+  firstButton.id = "driver" + eventId;
   const secondButton = document.createElement('button');
-
+  secondButton.textContent = "Carpool";
+  secondButton.id = "carpool" + eventId;
+  buttonContainer.appendChild(firstButton);
+  buttonContainer.appendChild(secondButton);
   
   await get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
     if (snapshot.exists()) {
-      document.getElementById("hi").innerHTML = snapshot.val().username.replace(/\n/g, "<br>");
       nameHeading.textContent = snapshot.val().name;
       latestGridItem.appendChild(nameHeading);
-      dateHeading.textContent = '4/1/2024';
+      dateHeading.textContent = snapshot.val().date;
       latestGridItem.appendChild(dateHeading);
       latestGridItem.appendChild(hr);
-      descriptionParagraph.innerHTML = "";
+      descriptionParagraph.innerHTML = snapshot.val().description.replace(/\n/g, "<br>");
       latestGridItem.appendChild(descriptionParagraph);
-      firstButton.textContent = 'Select';
-      buttonContainer.appendChild(firstButton);
-      secondButton.textContent = 'Select';
-      buttonContainer.appendChild(secondButton);
       latestGridItem.appendChild(buttonContainer);
     }
   });
-  
+  container.appendChild(latestGridItem);
 });
 
-const container = document.getElementById('container');
-container.appendChild(newItem);
-document.getElementById("button").addEventListener("click", function(event) {
-  event.preventDefault();
-  if (localStorage.getItem("driver") !== null) {
-    window.location.href = "Transport/eventReceipt.html";
-  }
-  else {
-    localStorage.setItem("driver", localStorage.getItem("currentuser"));
-    alert("Successfully signed up as a driver!");
-    window.location.href = "Transport/carpoolHub.html";
-  }
-})
+
+// document.getElementById("button").addEventListener("click", function(event) {
+//   event.preventDefault();
+//   if (localStorage.getItem("driver") !== null) {
+//     window.location.href = "Transport/eventReceipt.html";
+//   }
+//   else {
+//     localStorage.setItem("driver", localStorage.getItem("currentuser"));
+//     alert("Successfully signed up as a driver!");
+//     window.location.href = "Transport/carpoolHub.html";
+//   }
+// })
 
 /*
 const events = [
