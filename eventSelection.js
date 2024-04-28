@@ -72,6 +72,12 @@ snapshot.forEach((childSnapshot) => {
   
   // Create and append the h2 element for name
   const nameHeading = document.createElement('h2');
+  await get(child(ref(db), 'users/1')).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+      document.getElementById("hi").innerHTML = snapshot.val().username.replace(/\n/g, "<br>");
+    }
+  });
   nameHeading.textContent = 'Lorem ipsum dolor sit amet';
   latestGridItem.appendChild(nameHeading);
   
