@@ -1,1 +1,135 @@
-s
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snack Rankings</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+  </head>
+  <body>
+  
+    <!-- Main -->
+    <div class="container mt-4">
+      <h1>Snack Ranking</h1>
+      <p>Vote for your favorite snacks!</p>
+  
+      <!-- Snack Form -->
+      <form id="snack-form">
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="name" class="form-label">Snack Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="address" class="form-label">Vendor Address</label>
+            <input type="text" class="form-control" id="address" placeholder="Enter vendor address" required>
+          </div>
+  
+          <div class="col-md-4 mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" placeholder="Enter your description" required></textarea>
+          </div>
+  
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="bike" class="form-label">Snack Type</label>
+            <select class="form-select" id="bike" required>
+              <option selected disabled>Select a type</option>
+              <option value="1">Chips</option>
+              <option value="2">Baked Good</option>
+              <option value="3">Candy</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="price" class="form-label">Price Range</label>
+            <select class="form-select" id="price" required>
+              <option selected disabled>Select a price range</option>
+              <option value="1">$1 - $5</option>
+              <option value="2">$6 - $10</option>
+              <option value="3">$11 - $20</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <button id="submit" onclick="save()"> SUBMIT </button>
+          </div>
+        </div>
+      </form>
+  
+      <!-- Submission Result -->
+      <div class="submission-result">
+        <h3>Congratulations!</h3>
+        <p>Thank you for your snack submission! Your snack is ready to be voted for!</p>
+      </div>
+  
+      <!-- Snack Option Photos -->
+      <div class="row mt-4">
+        <div class="col-md-4">
+          <div class="snack-card">
+            <img src="https://media2.giphy.com/media/UVkD0VslfkuIkENji5/200w.gif?cid=6c09b952wu2xou7j8vt4hudhx51q9ibl0cbm9wfwqd6l8q3p&ep=v1_gifs_search&rid=200w.gif&ct=g" class="img-fluid" alt="Snack">
+            <div class="card-body">
+              <h5 class="card-title">Lays Chips</h5>
+              <p class="card-text">Crunchy, salty, potato, flavorful, addictive</p>
+              <a href="#" class="btn btn-primary bike-details-toggle" data-bike="mountain-bike"><i class="fas fa-info-circle me-2"></i>Details</a>
+              <div class="bike-details" id="mountain-bike-details">
+                <p>Lay's chips tantalize taste buds with their irresistible crunch and savory flavors. Each bite is a symphony of satisfaction, leaving you craving more. Whether enjoyed solo or shared, Lay's chips elevate snack time to a moment of pure bliss. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="snack-card">
+            <img src="https://cdn.dribbble.com/users/139869/screenshots/13359265/media/827ba87268c2885722d66afb85b7aa3e.gif" class="img-fluid" alt="Choco Cookie">
+            <div class="card-body">
+              <h5 class="card-title">Chocolate Chip Cookies</h5>
+              <p class="card-text">Scrumptious, classic, chewy, chocolatey delight</p>
+              <a href="#" class="btn btn-primary bike-details-toggle" data-bike="road-bike"><i class="fas fa-info-circle me-2"></i>Details</a>
+              <div class="bike-details" id="road-bike-details">
+                <p>Chocolate chip cookies offer a heavenly blend of buttery dough and gooey chocolate, melting in every mouthful. Their aroma alone evokes warmth and comfort, making them an irresistible treat for any occasion, from cozy evenings to joyous celebrations.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="snack-card">
+            <img src="https://media2.giphy.com/media/uAtk3qtDnHLhZRrmDj/giphy.gif" class="img-fluid" alt="Sour Cream">
+            <div class="card-body">
+              <h5 class="card-title">Sour Cream Chips</h5>
+              <p class="card-text">Tangy, creamy, crispy, addictive delight</p>
+              <a href="#" class="btn btn-primary bike-details-toggle" data-bike="city-bike"><i class="fas fa-info-circle me-2"></i>Details</a>
+              <div class="bike-details" id="city-bike-details">
+                <p>Sour cream chips deliver a tangy explosion with each crispy bite, perfectly balanced with creamy undertones. Their addictive flavor profile dances on the palate, leaving a lingering satisfaction that beckons for just one more chip, turning every snack into a memorable indulgence.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-analytics.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        const firebaseConfig = {
+          apiKey: "AIzaSyDjMBUC1EhrOSzzgId-sglmdmJJ4kCyV5Q",
+          authDomain: "club-central-2af6e.firebaseapp.com",
+          databaseURL: "https://club-central-2af6e-default-rtdb.firebaseio.com",
+          projectId: "club-central-2af6e",
+          storageBucket: "club-central-2af6e.appspot.com",
+          messagingSenderId: "578174084496",
+          appId: "1:578174084496:web:13f92682f267332f62ff15",
+          measurementId: "G-FKR7SRZ915"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+      </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="snackRanking.js"></script>
+    <link rel="stylesheet" type="text/css" href="snackRanking.css" />
+  </body>
