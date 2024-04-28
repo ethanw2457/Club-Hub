@@ -23,6 +23,17 @@ sign_in_btn.addEventListener('click', () =>{
     container.classList.remove("sign-up-mode");
 });
 
+const siUser = document.getElementById('submit1');
+const submitButton2 = document.getElementById('submit2');
+
+// Flags to track which button was clicked
+let buttonClicked = '';
+
+// Add click event listeners to the submit buttons
+submitButton1.addEventListener('click', () => {
+  buttonClicked = 'submit1';
+});
+
 
 // the below is not used but for reference
 document.getElementById("signupform").addEventListener("submit", async function(event) {
