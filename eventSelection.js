@@ -109,8 +109,7 @@ snapshot.forEach((childSnapshot) => {
   const buttonContainer = document.createElement('span');
   
   // Create and append the first button and its link
-  const firstButtonLink = document.createElement('a');
-  firstButtonLink.href = 'Organizations/eventReceipt.html';
+  
   const firstButton = document.createElement('button');
   firstButton.textContent = 'Select';
   firstButtonLink.appendChild(firstButton);
