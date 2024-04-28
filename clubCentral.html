@@ -10,11 +10,17 @@
           <li>Discover New Communities</li>
           <li>Coordinate Effectively</li>
         </ul>
-      <a href="login.html">
-      <div class="trustpilot">
-        Login/Sign Up</div>
+      <a href="login.html?redirect=clubCentral.html">
+      <div class="trustpilot" id="login">
+        Login/Sign Up</div></a>
+      <span class="trustpilot" id="welcome">
+        <!-- Username -->
+        <span id="username"></span>
+        <!-- Sign out link -->
+        <a href="login.html?redirect=clubCentral.html" id="sign-out-link"> Sign out</a>
+      </span>
       </div>
-      </a>
+    
     <div class="panels">
       <div class="panel">
         <a href="Organizations/clubHub.html">
@@ -55,5 +61,5 @@
   </div>
 </body>
 
-<script src="clubCentral.js"></script>
+<script src="clubCentral.js" type=module></script>
 <link rel="stylesheet" href="clubCentral.css">

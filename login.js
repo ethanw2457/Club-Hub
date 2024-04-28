@@ -1,3 +1,40 @@
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+import {getDatabase, ref, set, child, get, remove} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+
+const firebaseConfig = {
+  databaseURL: "https://club-central-2af6e-default-rtdb.firebaseio.com"
+};
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+// Initialize Realtime Database and get a reference to the service
+const db = getDatabase(app);
+
+
+
+//FOR DELETION
+//remove(ref(db, 'users/2'));
+function writeUserData() {
+  const name = document.getElementById("description").value;
+  //FOR STORING DATA
+  set(ref(db, 'users/1'), {
+    username: name,
+    email: "hi",
+    profile_picture : "hi"
+  });
+
+  //FOR READING DATA
+  get(child(ref(db), 'users/1')).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val());
+      document.getElementById("hi").innerHTML = snapshot.val().username.replace(/\n/g, "<br>");;
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
 const sign_in_btn = document.querySelector("#sign-in-btn");
 const sign_up_btn = document.querySelector("#sign-up-btn");
 const container = document.querySelector(".container");
@@ -25,24 +62,27 @@ document.getElementById("signupform").addEventListener("submit", function(event)
     return;
   }
   var i = 1;
-  while (localStorage.getItem("user" + i) !== null) {
-    i++;
-  }
-  localStorage.setItem("user" + i, name);
-  localStorage.setItem("email" + i, email);
-  localStorage.setItem("address" + i, address);
-  localStorage.setItem("password" + i, password);
-
-  localStorage.setItem("status" + i, "carpooler");
-
-  localStorage.setItem("currentuser", i);
+  get(child(ref(db), 'users')).then((snapshot) => {
+    if (snapshot.exists()) {
+      console.log(snapshot.val()["1"]);
+      //document.getElementById("hi").innerHTML = snapshot.val().username.replace(/\n/g, "<br>");;
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+  // while (localStorage.getItem("user" + i) !== null) {
+  //   i++;
+  // }
 
   //document.getElementById("result").innerHTML = localStorage.getItem("user1");
 
   //localStorage.clear();
   // Assume AJAX call to send login info to server and save in database
   // Redirect to another page after successful login
-  window.location.href = "clubCentral.html"; // Redirect to event selection page
+  const urlParams = new URLSearchParams(window.location.search);
+  window.location.href = urlParams.get('redirect'); // Redirect to event selection page
 });
 
 document.getElementById("signinform").addEventListener("submit", function(event) {
@@ -69,7 +109,8 @@ document.getElementById("signinform").addEventListener("submit", function(event)
   }
   else {
     localStorage.setItem("currentuser", i);
-    window.location.href = "clubCentral.html";
+    const urlParams = new URLSearchParams(window.location.search);
+    window.location.href = urlParams.get('redirect');
 
     //document.getElementById("result").innerHTML = localStorage.getItem("user1");
 
