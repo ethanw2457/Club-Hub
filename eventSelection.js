@@ -133,7 +133,7 @@ snapshot.forEach(async (childSnapshot) => {
 
         });
     }
-    window.location.href = '/Transport/eventReceipt.html?event=' + id;
+    //window.location.href = '/Transport/eventReceipt.html?event=' + id;
   });
 
 });
