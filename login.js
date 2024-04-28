@@ -52,7 +52,8 @@ sign_in_btn.addEventListener('click', () =>{
 document.getElementById("signupform").addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  const username = document.getElementById("signupname").value.trim();
+  const username = document.getElementById("signupusername").value.trim();
+  const name = document.getElementById("signupname").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("signuppassword").value.trim();
   const address = document.getElementById("address").value.trim();
@@ -60,6 +61,17 @@ document.getElementById("signupform").addEventListener("submit", async function(
   
   if (username === "" || email === "" || password === "" || address === "") {
     alert("Please fill in all fields.");
+    return;
+  }
+
+  let usernameAlreadyExists = false;
+  var snapshot = await get(child(ref(db), 'users/'));
+  snapshot.forEach((childSnapshot) => {
+    if (childSnapshot.child('username').val() == username)
+      usernameAlreadyExists = true;
+  });
+  if (usernameAlreadyExists) {
+    alert("Username already exists");
     return;
   }
   let i = 1;
@@ -88,7 +100,7 @@ document.getElementById("signupform").addEventListener("submit", async function(
   // Assume AJAX call to send login info to server and save in database
   const urlParams = new URLSearchParams(window.location.search);
   //Redirect to page that brought user to login page
-  window.location.href = urlParams.get('redirect');
+  window.location.href = urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';
 });
 
 document.getElementById("signinform").addEventListener("submit", function(event) {
