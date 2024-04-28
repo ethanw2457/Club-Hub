@@ -19,6 +19,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const storage = getStorage(app);
 
+const container = document.getElementById('container');
 
 var snapshot = await get(child(ref(db), 'events/'));
 snapshot.forEach((childSnapshot) => {
