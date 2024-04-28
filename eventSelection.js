@@ -75,55 +75,29 @@ snapshot.forEach((childSnapshot) => {
   const dateHeading = document.createElement('h3');
   const hr = document.createElement('hr');
   const descriptionParagraph = document.createElement('p');
-
-
-
+  const buttonContainer = document.createElement('span');
+  const firstButton = document.createElement('button');
+  const secondButton = document.createElement('button');
 
   
-  await get(child(ref(db), 'users/1')).then((snapshot) => {
+  await get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
     if (snapshot.exists()) {
-      console.log(snapshot.val());
       document.getElementById("hi").innerHTML = snapshot.val().username.replace(/\n/g, "<br>");
+      nameHeading.textContent = snapshot.val().name;
+      latestGridItem.appendChild(nameHeading);
+      dateHeading.textContent = '4/1/2024';
+      latestGridItem.appendChild(dateHeading);
+      latestGridItem.appendChild(hr);
+      descriptionParagraph.innerHTML = "";
+      latestGridItem.appendChild(descriptionParagraph);
+      firstButton.textContent = 'Select';
+      buttonContainer.appendChild(firstButton);
+      secondButton.textContent = 'Select';
+      buttonContainer.appendChild(secondButton);
+      latestGridItem.appendChild(buttonContainer);
     }
   });
-  nameHeading.textContent = 'Lorem ipsum dolor sit amet';
-  latestGridItem.appendChild(nameHeading);
   
-  // Create and append the h3 element for date
-  
-  dateHeading.textContent = '4/1/2024';
-  latestGridItem.appendChild(dateHeading);
-  
-  // Create and append the hr element
-  
-  latestGridItem.appendChild(hr);
-  
-  // Create and append the p element for description
-  descriptionParagraph.innerHTML = `Description of Event:<br> 
-                                    Event Location:<br> 
-                                    Organized by:<br>
-                                    Driver: No`;
-  latestGridItem.appendChild(descriptionParagraph);
-  
-  // Create a span element to contain the buttons
-  const buttonContainer = document.createElement('span');
-  
-  // Create and append the first button and its link
-  
-  const firstButton = document.createElement('button');
-  firstButton.textContent = 'Select';
-  firstButtonLink.appendChild(firstButton);
-  buttonContainer.appendChild(firstButtonLink);
-  
-  // Create and append the second button and its link
-  const secondButtonLink = document.createElement('a');
-  secondButtonLink.href = 'Organizations/eventReceipt.html';
-  const secondButton = document.createElement('button');
-  secondButton.textContent = 'Select';
-  secondButtonLink.appendChild(secondButton);
-  buttonContainer.appendChild(secondButtonLink);
-  
-  latestGridItem.appendChild(buttonContainer);
 });
 
 const container = document.getElementById('container');
