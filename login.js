@@ -23,7 +23,7 @@ sign_in_btn.addEventListener('click', () =>{
     container.classList.remove("sign-up-mode");
 });
 
-const siUser = document.getElementById('submit1');
+const suUser = document.getElementById('submit1');
 const submitButton2 = document.getElementById('submit2');
 
 // Flags to track which button was clicked
