@@ -2,6 +2,7 @@ import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase
 import {getDatabase, ref, set, child, get, remove, update} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 import {getStorage, ref as sref, uploadBytes, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
 
+// Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDjMBUC1EhrOSzzgId-sglmdmJJ4kCyV5Q",
@@ -13,6 +14,41 @@ const firebaseConfig = {
   appId: "1:578174084496:web:13f92682f267332f62ff15",
   measurementId: "G-FKR7SRZ915"
 };
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const storage = getStorage(app);
+$(document).ready(function () {
+  $("#resp-menu").click(function () {
+    $(".menu").show();
+    $(".biz_header_overlay").show();
+    $(".menu_close").show();
+  });
+  $(".menu_close").click(function () {
+    $(".menu").hide();
+    $(".biz_header_overlay").hide();
+  });
+  $(".biz_header_overlay").click(function () {
+    $(".menu").hide();
+    $(".menu_close").hide();
+    $(".biz_header_overlay").hide();
+  });
+});
+
+document.getElementById("sign-out").addEventListener('click', signOut);
+
+function signOut() {
+  sessionStorage.setItem("currentUser", "");
+}
+getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
+.then((url) => {
+
+  // Or inserted into an <img> element
+  const img = document.getElementById('profile-pic');
+  img.setAttribute('src', url);
+});
+// End of Header Package================================================================================================
+
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // Initialize Realtime Database and get a reference to the service
@@ -40,6 +76,7 @@ snapshot.forEach(async (childSnapshot) => {
   });
   // Create and append the h2 element for name
   const nameHeading = document.createElement('h2');
+  const clubHeading = document.createElement('h3');
   const dateHeading = document.createElement('h3');
   const hr = document.createElement('hr');
   const descriptionParagraph = document.createElement('p');
