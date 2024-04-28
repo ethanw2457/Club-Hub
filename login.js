@@ -101,13 +101,13 @@ document.getElementById("signupform").addEventListener("submit", async function(
       done = true;
     }
   }
-  const storageRef = sref(storage, 'profiles/user1.jpg');
-
+  const storageRef = sref(storage, 'images/test.jpg');
+  const file = imageUploadInput.files[0];
   // 'file' comes from the Blob or File API
   uploadBytes(storageRef, file).then((snapshot) => {
     console.log('Uploaded a blob or file!');
   });
-  uploadBytes(storageRef, imageUploadInput.files[0]);
+  //uploadBytes(storageRef, imageUploadInput.files[0]);
   sessionStorage.setItem("currentUser", i);
   // while (localStorage.getItem("user" + i) !== null) {
   //   i++;
