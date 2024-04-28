@@ -1,8 +1,5 @@
 @charset "utf-8";
-/* CSS Document */
-/*** css top section start ***/
-
-
+/* ==============================================Start of Header Package==============================================*/
 .section1 {
   position: absolute;
   top: 0; /* Make sure the parent container is positioned */
@@ -638,7 +635,7 @@ a.homer {
     text-align: center;
   }
 }
-/***  header section end ***/
+/* ==============================================End of Header Package==============================================*/
 
 
 

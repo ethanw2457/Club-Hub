@@ -60,21 +60,18 @@ snapshot.forEach((childSnapshot) => {
     }
     window.location.href = '/Transport/eventReceipt.html?event=' + id;
   });
-  getDownloadURL(sref(storage, 'events/' + sessionStorage.getItem("currentUser")))
+  await getDownloadURL(sref(storage, 'events/' + sessionStorage.getItem("currentUser")))
   .then((url) => {
 
     // Or inserted into an <img> element
-    const img = document.getElementById('profile-pic');
-    img.setAttribute('src', url);
+    const img = document.createElement('img');
+    img.src = url;
+    latestGridItem.appendChild(img);
+
   });
-  // Create and append the image element
-  const img = document.createElement('img');
-  img.src = 'https://source.unsplash.com/collection/887284/1600x900';
-  latestGridItem.appendChild(img);
   
   // Create and append the h2 element for name
   const nameHeading = document.createElement('h2');
-  nameHeading.id = 'name';
   nameHeading.textContent = 'Lorem ipsum dolor sit amet';
   latestGridItem.appendChild(nameHeading);
   
