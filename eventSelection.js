@@ -130,11 +130,15 @@ snapshot.forEach(async (childSnapshot) => {
         // Set the modified array back to the database
 
         });
-      await update(ref(db, "events/" + id), {
+      try {
+        await update(ref(db, "events/" + id), {
         carpoolers: currentArray
       });
+      }
+      catch (error) {
+      }
     }
-    window.location.href = '/Transport/eventReceipt.html?event=' + id;
+    //window.location.href = '/Transport/eventReceipt.html?event=' + id;
   });
 
 });
