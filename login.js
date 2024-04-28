@@ -1,5 +1,5 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import {getDatabase, ref, set, child, get, remove} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+import {getDatabase, ref, set, child, get, remove, update} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 
 const firebaseConfig = {
   databaseURL: "https://club-central-2af6e-default-rtdb.firebaseio.com"
@@ -10,30 +10,6 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 
 
-
-//FOR DELETION
-//remove(ref(db, 'users/2'));
-function writeUserData() {
-  const name = document.getElementById("description").value;
-  //FOR STORING DATA
-  set(ref(db, 'users/1'), {
-    username: name,
-    email: "hi",
-    profile_picture : "hi"
-  });
-
-  //FOR READING DATA
-  get(child(ref(db), 'users/1')).then((snapshot) => {
-    if (snapshot.exists()) {
-      console.log(snapshot.val());
-      document.getElementById("hi").innerHTML = snapshot.val().username.replace(/\n/g, "<br>");;
-    } else {
-      console.log("No data available");
-    }
-  }).catch((error) => {
-    console.error(error);
-  });
-}
 
 const sign_in_btn = document.querySelector("#sign-in-btn");
 const sign_up_btn = document.querySelector("#sign-up-btn");
@@ -57,6 +33,8 @@ document.getElementById("signupform").addEventListener("submit", async function(
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("signuppassword").value.trim();
   const address = document.getElementById("address").value.trim();
+  const phone = document.getElementById("phonenumber").value.trim();
+
 
   
   if (name === "" || username === "" || email === "" || password === "" || address === "") {
@@ -85,7 +63,9 @@ document.getElementById("signupform").addEventListener("submit", async function(
         name: name,
         username: username,
         email: email,
-        password: password
+        password: password,
+        address: address,
+        phone: phone
       });
       done = true;
     }
