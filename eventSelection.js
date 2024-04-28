@@ -72,6 +72,14 @@ snapshot.forEach((childSnapshot) => {
   
   // Create and append the h2 element for name
   const nameHeading = document.createElement('h2');
+  const dateHeading = document.createElement('h3');
+  const hr = document.createElement('hr');
+  const descriptionParagraph = document.createElement('p');
+
+
+
+
+  
   await get(child(ref(db), 'users/1')).then((snapshot) => {
     if (snapshot.exists()) {
       console.log(snapshot.val());
@@ -82,18 +90,15 @@ snapshot.forEach((childSnapshot) => {
   latestGridItem.appendChild(nameHeading);
   
   // Create and append the h3 element for date
-  const dateHeading = document.createElement('h3');
-  dateHeading.id = 'date';
+  
   dateHeading.textContent = '4/1/2024';
   latestGridItem.appendChild(dateHeading);
   
   // Create and append the hr element
-  const hr = document.createElement('hr');
+  
   latestGridItem.appendChild(hr);
   
   // Create and append the p element for description
-  const descriptionParagraph = document.createElement('p');
-  descriptionParagraph.id = 'description';
   descriptionParagraph.innerHTML = `Description of Event:<br> 
                                     Event Location:<br> 
                                     Organized by:<br>
