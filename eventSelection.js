@@ -64,7 +64,7 @@ snapshot.forEach(async (childSnapshot) => {
   // Create the parent container div
   const latestGridItem = document.createElement('div');
   latestGridItem.classList.add('latest-grid-item');
-  
+
   await getDownloadURL(sref(storage, 'events/' + eventId))
   .then((url) => {
 
@@ -76,7 +76,7 @@ snapshot.forEach(async (childSnapshot) => {
   });
   // Create and append the h2 element for name
   const nameHeading = document.createElement('h2');
-  const clubHeading = document.createElement('h3');
+  //const clubHeading = document.createElement('h3');
   const dateHeading = document.createElement('h3');
   const hr = document.createElement('hr');
   const descriptionParagraph = document.createElement('p');
@@ -90,7 +90,7 @@ snapshot.forEach(async (childSnapshot) => {
   secondButton.id = "carpool" + eventId;
   buttonContainer.appendChild(firstButton);
   buttonContainer.appendChild(secondButton);
-  
+
   await get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
     if (snapshot.exists()) {
       nameHeading.textContent = snapshot.val().name;
@@ -135,7 +135,7 @@ snapshot.forEach(async (childSnapshot) => {
     }
     window.location.href = '/Transport/eventReceipt.html?event=' + id;
   });
-  
+
 });
 
 
