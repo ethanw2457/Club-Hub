@@ -60,7 +60,13 @@ snapshot.forEach((childSnapshot) => {
     }
     window.location.href = '/Transport/eventReceipt.html?event=' + id;
   });
-  
+  getDownloadURL(sref(storage, 'events/' + sessionStorage.getItem("currentUser")))
+  .then((url) => {
+
+    // Or inserted into an <img> element
+    const img = document.getElementById('profile-pic');
+    img.setAttribute('src', url);
+  });
   // Create and append the image element
   const img = document.createElement('img');
   img.src = 'https://source.unsplash.com/collection/887284/1600x900';

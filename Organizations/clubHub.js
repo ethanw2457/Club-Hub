@@ -43,4 +43,4 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
   // Or inserted into an <img> element
   const img = document.getElementById('profile-pic');
   img.setAttribute('src', url);
-})
+});
