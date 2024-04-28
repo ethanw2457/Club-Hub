@@ -49,27 +49,35 @@ sign_in_btn.addEventListener('click', () =>{
 
 
 // the below is not used but for reference
-document.getElementById("signupform").addEventListener("submit", function(event) {
+document.getElementById("signupform").addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  const name = document.getElementById("signupname").value.trim();
+  const username = document.getElementById("signupname").value.trim();
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("signuppassword").value.trim();
   const address = document.getElementById("address").value.trim();
 
-  if (name === "" || email === "" || password === "" || address === "") {
+  
+  if (username === "" || email === "" || password === "" || address === "") {
     alert("Please fill in all fields.");
     return;
   }
-  var i = 1;
-  while (true) {
-    get(child(ref(db), 'users/' + i)).then((snapshot) => {
-      if (snapshot.exists()) {
-        i++; continue;
-      } else {
-        console.log("No data available");
-      }
-    })
+  let i = 1;
+  let done = false;
+  while (!done) {
+    snapshot = await get(child(ref(db), 'users/' + i));
+    if (snapshot.exists()) {
+      i++;
+    } else {
+      await set(ref(db, 'users/' + i), {
+        name: username,
+        email: email,
+        profile_picture: password
+      });
+      done = true;
+    }
+  }
+  sessionStorage.setItem("currentUser", i);
   // while (localStorage.getItem("user" + i) !== null) {
   //   i++;
   // }
@@ -78,9 +86,9 @@ document.getElementById("signupform").addEventListener("submit", function(event)
 
   //localStorage.clear();
   // Assume AJAX call to send login info to server and save in database
-  // Redirect to another page after successful login
   const urlParams = new URLSearchParams(window.location.search);
-  window.location.href = urlParams.get('redirect'); // Redirect to event selection page
+  //Redirect to page that brought user to login page
+  window.location.href = urlParams.get('redirect');
 });
 
 document.getElementById("signinform").addEventListener("submit", function(event) {
