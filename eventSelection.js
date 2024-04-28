@@ -120,20 +120,21 @@ snapshot.forEach(async (childSnapshot) => {
       }
     }
     else {
-      await get(child(ref(db), 'events/' + id)).then(async (snapshot) => {
+      var currentArray = []
+      await get(child(ref(db), 'events/' + id)).then( (snapshot) => {
         // Get the current array data from the snapshot
-        const currentArray = snapshot.val().carpoolers || [];
+        currentArray = snapshot.val().carpoolers || [];
         // Iterate through the array items
         currentArray.push(sessionStorage.getItem("currentUser"));
 
         // Set the modified array back to the database
-        await update(ref(db, "events/" + id), {
-          carpoolers: currentArray
-        });
 
         });
+      await update(ref(db, "events/" + id), {
+        carpoolers: currentArray
+      });
     }
-    //window.location.href = '/Transport/eventReceipt.html?event=' + id;
+    window.location.href = '/Transport/eventReceipt.html?event=' + id;
   });
 
 });
