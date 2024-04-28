@@ -1,12 +1,16 @@
-import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+import { getDatabase, ref, set, child, get, remove, update } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+import { getStorage, ref as sref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
 
-// TODO: Replace the following with your app's Firebase project configuration
-// See: https://firebase.google.com/docs/web/learn-more#config-object
 const firebaseConfig = {
-  // ...
-  // The value of `databaseURL` depends on the location of the database
-  databaseURL: "https://club-central-2af6e-default-rtdb.firebaseio.com/",
+  apiKey: "AIzaSyDjMBUC1EhrOSzzgId-sglmdmJJ4kCyV5Q",
+  authDomain: "club-central-2af6e.firebaseapp.com",
+  databaseURL: "https://club-central-2af6e-default-rtdb.firebaseio.com",
+  projectId: "club-central-2af6e",
+  storageBucket: "club-central-2af6e.appspot.com",
+  messagingSenderId: "578174084496",
+  appId: "1:578174084496:web:13f92682f267332f62ff15",
+  measurementId: "G-FKR7SRZ915"
 };
 
 // Initialize Firebase
@@ -15,11 +19,8 @@ const app = initializeApp(firebaseConfig);
 // Initialize Realtime Database and get a reference to the service
 const db = getDatabase(app);
 
-
-
-
 // Handle form submission
-const rentalForm = document.getElementById('rental-form');
+const rentalForm = document.getElementById('snack-form');
 const submissionResult = document.querySelector('.submission-result');
 
 rentalForm.addEventListener('submit', function(e) {
@@ -27,10 +28,12 @@ rentalForm.addEventListener('submit', function(e) {
 
   // Get form values
   const name = document.getElementById('name').value;
-  const email = document.getElementById('email').value;
-  const destination = document.getElementById('destination').value;
+  const address = document.getElementById('address').value;
+  const description = document.getElementById('description').value;
   const bike = document.getElementById('bike').value;
   const price = document.getElementById('price').value;
+  console.log(name, address, description, bike, price);
+  save(name, address, description, bike, price);
 
   // Display submission result
   submissionResult.classList.add('show');
@@ -39,17 +42,16 @@ rentalForm.addEventListener('submit', function(e) {
 
 //save to database
 
-function save() {
-    db.ref('snacks/' + name).set({
-       name: name,
-       email: email,
-       destination: destination,
-       bike: bike, 
-       price: price,
+function save(name, address, description, bike, price) {
+  set(ref(db, 'snacks/' + name), {
+    name: name,
+    address: address,
+    description: description,
+    bike: bike,
+    price: price,
+  });
 
-    })
-
-    alert('Saved')
+  alert('Saved')
 }
 
 // Handle bike details toggle
@@ -62,3 +64,4 @@ bikeDetailsToggle.forEach(function(element) {
     bikeDetails.classList.toggle('show');
   });
 });
+
