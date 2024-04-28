@@ -65,7 +65,7 @@ document.getElementById("signupform").addEventListener("submit", function(event)
   while (true) {
     get(child(ref(db), 'users/' + i)).then((snapshot) => {
       if (snapshot.exists()) {
-        continue
+        i++; continue;
       } else {
         console.log("No data available");
       }
