@@ -100,7 +100,7 @@ document.getElementById("signupform").addEventListener("submit", async function(
       done = true;
     }
   }
-  const storageRef = sref(storage, 'users/' + i);
+  const storageRef = sref(storage, 'events/1');
   const file = imageUploadInput.files[0];
   // 'file' comes from the Blob or File API
   await uploadBytes(storageRef, file);
