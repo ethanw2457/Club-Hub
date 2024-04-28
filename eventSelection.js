@@ -29,6 +29,44 @@ snapshot.forEach((childSnapshot) => {
   const latestGridItem = document.createElement('div');
   latestGridItem.id = eventId;
   latestGridItem.classList.add('latest-grid-item');
+  
+  await getDownloadURL(sref(storage, 'events/' + eventId))
+  .then((url) => {
+
+    // Or inserted into an <img> element
+    const img = document.createElement('img');
+    img.src = url;
+    latestGridItem.appendChild(img);
+
+  });
+  // Create and append the h2 element for name
+  const nameHeading = document.createElement('h2');
+  const dateHeading = document.createElement('h3');
+  const hr = document.createElement('hr');
+  const descriptionParagraph = document.createElement('p');
+  const buttonContainer = document.createElement('span');
+  const firstButton = document.createElement('button');
+  firstButton.textContent = "Drive";
+  firstButton.id = "driver" + eventId;
+  const secondButton = document.createElement('button');
+  secondButton.textContent = "Carpool";
+  secondButton.id = "carpool" + eventId;
+  buttonContainer.appendChild(firstButton);
+  buttonContainer.appendChild(secondButton);
+  
+  get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
+    if (snapshot.exists()) {
+      nameHeading.textContent = snapshot.val().name;
+      latestGridItem.appendChild(nameHeading);
+      dateHeading.textContent = snapshot.val().date;
+      latestGridItem.appendChild(dateHeading);
+      latestGridItem.appendChild(hr);
+      descriptionParagraph.innerHTML = snapshot.val().description.replace(/\n/g, "<br>");
+      latestGridItem.appendChild(descriptionParagraph);
+      latestGridItem.appendChild(buttonContainer);
+    }
+  });
+  container.appendChild(latestGridItem);
   document.getElementById(eventId).addEventListener("click", async function(event) {
     // Access the id attribute of the target element
     const id = event.target.id.charAt(event.target.id.length - 1).toString();
@@ -61,44 +99,7 @@ snapshot.forEach((childSnapshot) => {
     }
     window.location.href = '/Transport/eventReceipt.html?event=' + id;
   });
-  getDownloadURL(sref(storage, 'events/' + eventId))
-  .then((url) => {
-
-    // Or inserted into an <img> element
-    const img = document.createElement('img');
-    img.src = url;
-    latestGridItem.appendChild(img);
-
-  });
   
-  // Create and append the h2 element for name
-  const nameHeading = document.createElement('h2');
-  const dateHeading = document.createElement('h3');
-  const hr = document.createElement('hr');
-  const descriptionParagraph = document.createElement('p');
-  const buttonContainer = document.createElement('span');
-  const firstButton = document.createElement('button');
-  firstButton.textContent = "Drive";
-  firstButton.id = "driver" + eventId;
-  const secondButton = document.createElement('button');
-  secondButton.textContent = "Carpool";
-  secondButton.id = "carpool" + eventId;
-  buttonContainer.appendChild(firstButton);
-  buttonContainer.appendChild(secondButton);
-  
-  get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
-    if (snapshot.exists()) {
-      nameHeading.textContent = snapshot.val().name;
-      latestGridItem.appendChild(nameHeading);
-      dateHeading.textContent = snapshot.val().date;
-      latestGridItem.appendChild(dateHeading);
-      latestGridItem.appendChild(hr);
-      descriptionParagraph.innerHTML = snapshot.val().description.replace(/\n/g, "<br>");
-      latestGridItem.appendChild(descriptionParagraph);
-      latestGridItem.appendChild(buttonContainer);
-    }
-  });
-  container.appendChild(latestGridItem);
 });
 
 
