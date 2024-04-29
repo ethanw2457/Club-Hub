@@ -1,5 +1,6 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import {getStorage, ref as sref, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
+import {getDatabase, ref, set, child, get, remove, update} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+import {getStorage, ref as sref, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -14,6 +15,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 const storage = getStorage(app);
 
 
@@ -29,20 +31,45 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
   const img = document.getElementById('profile-pic');
   img.setAttribute('src', url);
 });
-// End of Header Package================================================================================================
-function check() {
-  var checkBox = document.getElementById("checbox");
-  var text1 = document.getElementsByClassName("text1");
-  var text2 = document.getElementsByClassName("text2");
+get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then((snapshot) => {
+  if (!snapshot.val().creator)
+    document.getElementById("createClub").style.display = "none";
 
-  for (var i = 0; i < text1.length; i++) {
-    if (checkBox.checked == true) {
-      text1[i].style.display = "block";
-      text2[i].style.display = "none";
-    } else if (checkBox.checked == false) {
-      text1[i].style.display = "none";
-      text2[i].style.display = "block";
-    }
+});
+// End of Header Package================================================================================================
+var events;
+await get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then((snapshot) => {
+  events = snapshot.val().events || [];
+});
+if (events.length == 0) {
+  const noRiders = document.createElement("h1");
+  noRiders.innerHTML = "There are currently no riders for this event.";
+  document.getElementById("carpoolers").appendChild(noRiders);
+}
+else {
+  for (let i = 0; i < events.length; i++) {
+    const span = document.createElement("span");
+
+    await getDownloadURL(sref(storage, 'users/' + events[i]))
+    .then((url) => {
+      if (url) {
+        const img = document.createElement('img');
+        img.classList.add("header-img");
+        img.src = url;
+        span.appendChild(img);
+      }
+    });
+    await get(child(ref(db), 'users/' + events[i])).then((snapshot) => {
+      if (snapshot.exists()) {
+        const name = document.createElement("h1");
+        name.innerHTML = snapshot.val().name;
+        span.appendChild(name);
+        const description = document.createElement("h2");
+        description.innerHTML = "Carpooler<br>" + snapshot.val().phone + "<br>" + snapshot.val().email + "<br>" + snapshot.val().address;
+        span.appendChild(description);
+        carpoolAddresses.push(snapshot.val().address);
+      }
+    });
+    document.getElementById("carpoolers").appendChild(span);
   }
 }
-check();
