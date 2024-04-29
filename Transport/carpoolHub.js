@@ -73,3 +73,12 @@ else {
     document.getElementById("carpoolers").appendChild(span);
   }
 }
+
+clubLink.id = eventId + "club" + snapshot.val().club;
+document.getElementById(eventId).addEventListener("click", async function(event) {
+// Access the id attribute of the target element
+const id = event.target.id.charAt(event.target.id.length - 1).toString();
+if (event.target.id.includes("club")) {
+  sessionStorage.setItem("currentClub", id);
+  return;
+}
