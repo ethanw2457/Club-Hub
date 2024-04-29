@@ -34,7 +34,7 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
 
 const id = sessionStorage.getItem("currentClub");
 
-await get(child(ref(db), 'clubs/' + id)).then((snapshot) => {
+get(child(ref(db), 'clubs/' + id)).then((snapshot) => {
   if (!snapshot.exists())
     return;
   document.getElementById("name").innerHTML = snapshot.val().name;
@@ -43,10 +43,11 @@ await get(child(ref(db), 'clubs/' + id)).then((snapshot) => {
   document.getElementById("description").innerHTML = snapshot.val().description;
   
 });
-getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
+
+getDownloadURL(sref(storage, 'clubs/' + id))
 .then((url) => {
 
   // Or inserted into an <img> element
-  const img = document.getElementById('profile-pic');
+  const img = document.getElementById('photo');
   img.setAttribute('src', url);
 });
