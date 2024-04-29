@@ -720,7 +720,10 @@ strong.api:hover {
 }
 .img p {
 }
-
+img.profile {
+  width: 100%;
+  max-width: 25vw;
+}
 img.profile:hover {
   mix-blend-mode: normal;
   border: 3px solid #000000;
@@ -808,8 +811,5 @@ img.profile:hover {
     border: 3px solid #000000;
     box-shadow: 5px 5px 0px #000000;
     transform: rotate(-3.21deg);
-  }
-  img.profile {
-    width: 25%;
   }
 }
