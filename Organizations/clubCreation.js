@@ -36,10 +36,9 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
 document.getElementById("profileForm").addEventListener("submit", async function(event) {
   event.preventDefault();
 
-  const username = document.getElementById("signupusername").value.trim();
-  const name = document.getElementById("signupname").value.trim();
+  const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("signuppassword").value.trim();
+  const category = document.getElementById("ClubCategory").value.trim();
   const address = document.getElementById("address").value.trim();
   const phone = document.getElementById("phonenumber").value.trim();
   const imageUploadInput = document.getElementById('photo');
