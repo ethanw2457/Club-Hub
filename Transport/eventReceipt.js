@@ -46,14 +46,13 @@ if (carpoolers.length == 0) {
 }
 else {
   for (let i = 0; i < carpoolers.length; i++) {
+    const span = document.createElement("span");
     await getDownloadURL(sref(storage, 'events/' + eventId))
     .then((url) => {
-
-      // Or inserted into an <img> element
       const img = document.createElement('img');
+      img.classList.add("header-img");
       img.src = url;
-      latestGridItem.appendChild(img);
-
+      span.appendChild(img);
     });
     await get(child(ref(db), 'users/' + carpoolers[i])).then((snapshot) => {
       if (snapshot.exists()) {

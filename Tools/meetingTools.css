@@ -560,7 +560,7 @@ main {
     grid-column: 2;
     grid-row: 2 / 4;
     width: 100%;
-    min-width: 20rem;
+    min-width: 20rem; 
     max-width: 25rem;
     border: none;
   }
