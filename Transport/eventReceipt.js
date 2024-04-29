@@ -103,18 +103,20 @@ function initMap() {
 
 function calculateAndDisplayRoute(directionsService, directionsRenderer) {
   const waypts = [];
-  waypts.push({
-    location: localStorage.getItem("address"+localStorage.getItem("currentuser")),
+  carpoolAddresses.forEach(function(address) {
+    waypts.push({
+    location: address,
     stopover: true,
-  })
+    })
+  });
   directionsService
   .route({
     origin: {
-      query: localStorage.getItem("address" + localStorage.getItem("driver")),
+      query: driverAddress,
     },
     waypoints: waypts,
     destination: {
-      query: localStorage.getItem("eventaddress"),
+      query: eventLocation,
     },
     travelMode: google.maps.TravelMode.DRIVING,
   })
