@@ -85,10 +85,25 @@ h2 {
   align-items: top;
   justify-content: center;
   height: 100vh;
-  gap: 20px;
-  margin-left: 20px;
-  margin-right: 20px;
+
+  padding: 0 20px;
 }
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; /* Adjust as needed */
+  margin: 0 auto; /* Center the container horizontally */
+  max-width: 800px; /* Adjust as needed */
+   /* Add padding to the left and right sides */
+}
+
+.container span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px; /* Add space between span elements */
+}
+
 
 /*=============== MENU ===============*/
 

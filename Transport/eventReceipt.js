@@ -61,6 +61,7 @@ if (carpoolers.length == 0) {
 else {
   for (let i = 0; i < carpoolers.length; i++) {
     const span = document.createElement("span");
+
     await getDownloadURL(sref(storage, 'users/' + carpoolers[i]))
     .then((url) => {
       if (url) {
