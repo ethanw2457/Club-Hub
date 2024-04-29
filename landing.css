@@ -263,8 +263,8 @@ iframe {
 
 .inner-image-container {
   position: relative;
-  padding-right: .78125rem;
-  padding-left: .78125rem;
+  padding-right: 0.1rem;
+  padding-left: 0.1rem;
   flex: 0 0 100%;
   max-width: 100%;
   height: auto;
