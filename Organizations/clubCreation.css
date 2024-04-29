@@ -62,7 +62,6 @@ body {
   font-family: "Roboto", sans-serif;
   position: relative;
   background:url("https://images.unsplash.com/photo-1656666100620-799b8400516e?crop=entropy&cs=tinysrgb&fm=jpg&ixid=MnwzMjM4NDZ8MHwxfHJhbmRvbXx8fHx8fHx8fDE2NTgzMTgzOTI&ixlib=rb-1.2.1&q=80") no-repeat;
-  backgroung-size:contain;
   overflow-x: hidden;
 }
 .clearfix {
