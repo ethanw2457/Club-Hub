@@ -15,6 +15,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 const storage = getStorage(app);
 
 
@@ -32,7 +33,7 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
 });
 // End of Header Package================================================================================================
 
-document.getElementById("signupform").addEventListener("submit", async function(event) {
+document.getElementById("profileForm").addEventListener("submit", async function(event) {
   event.preventDefault();
 
   const username = document.getElementById("signupusername").value.trim();
