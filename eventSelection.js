@@ -43,7 +43,9 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
 const container = document.getElementById('container');
 
 var snapshot = await get(child(ref(db), 'events/'));
+console.log(snapshot.val());
 snapshot.forEach(async (childSnapshot) => {
+  console.log(childSnapshot);
   const eventId = childSnapshot.key;
   childSnapshot.child('username').val()
   // Create the parent container div
