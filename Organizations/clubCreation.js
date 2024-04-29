@@ -42,7 +42,7 @@ document.getElementById("profileForm").addEventListener("submit", async function
   const password = document.getElementById("signuppassword").value.trim();
   const address = document.getElementById("address").value.trim();
   const phone = document.getElementById("phonenumber").value.trim();
-  const imageUploadInput = document.getElementById('imageUpload');
+  const imageUploadInput = document.getElementById('photo');
 
 
   if (name === "" || username === "" || email === "" || password === "" || address === "") {
