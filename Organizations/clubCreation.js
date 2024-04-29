@@ -31,6 +31,11 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
   const img = document.getElementById('profile-pic');
   img.setAttribute('src', url);
 });
+get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then((snapshot) => {
+  if (!snapshot.val().creator)
+    document.getElementById("createClub").style.display = "none";
+
+});
 // End of Header Package================================================================================================
 
 document.getElementById("profileForm").addEventListener("submit", async function(event) {

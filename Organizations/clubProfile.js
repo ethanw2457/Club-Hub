@@ -30,6 +30,18 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
   const img = document.getElementById('profile-pic');
   img.setAttribute('src', url);
 });
+get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then((snapshot) => {
+  if (!snapshot.val().creator) {
+    document.getElementById("createClub").style.display = "none";
+    document.getElementById("createEvent").style.display = "none";
+  }
+  else {
+    var array = snapshot.val().clubs || [];
+    if (!array.includes(sessionStorage.getItem("currentClub")))
+      document.getElementById("createEvent").style.display = "none";
+  }
+
+});
 // End of Header Package================================================================================================
 
 const id = sessionStorage.getItem("currentClub");
