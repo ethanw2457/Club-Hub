@@ -82,24 +82,18 @@ h2 {
 
 .container {
   display: flex;
-  align-items: top;
-  justify-content: center;
-  height: 100vh;
-
-  padding: 0 20px;
-}
-.container {
-  display: flex;
   flex-wrap: wrap;
-  justify-content: space-between; /* Adjust as needed */
-  margin: 0 auto; /* Center the container horizontally */
-  max-width: 800px; /* Adjust as needed */
-   /* Add padding to the left and right sides */
+  align-items: top;
+  margin: 0 auto;
+  justify-content: space-between;
+  height: 100vh;
+  padding: 0 20px;
+  overflow: auto;
 }
 
 .container span {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   margin-bottom: 20px; /* Add space between span elements */
 }
@@ -543,10 +537,7 @@ textarea {
   }
 }
 
-/* A little cheat to trick the freecodecamp certification test. It requires 
-the navbar to be on top of the viewport, but I've already done that in previous 
-projects and I think in this one it looks more interesting on the side.
-I hope the freecodecamp team won't be mad at me :) */
+
 #navbar {
   position: fixed;
   margin: 0;
