@@ -129,6 +129,17 @@ for (const childSnapshot of snapshotArray) {
         await update(ref(db, 'events/' + id), {
           driver: sessionStorage.getItem("currentUser")
         });
+        await get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then(async (snapshot) => {
+          // Get the current array data from the snapshot
+          var currentArray = snapshot.val().events || [];
+          // Iterate through the array items
+          currentArray.push(id);
+
+          // Set the modified array back to the database
+          await update(ref(db, "users/" + sessionStorage.getItem("currentUser")), {
+            events: currentArray
+          });
+        });
       }
       sessionStorage.setItem("currentEvent", id);
       window.location.href = '/Transport/eventReceipt.html';
