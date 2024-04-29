@@ -46,7 +46,7 @@ document.getElementById("profileForm").addEventListener("submit", async function
   const imageUploadInput = document.getElementById('photo');
 
 
-  if (name === "" || username === "" || email === "" || password === "" || address === "") {
+  if (name === "" || email === "" || category === "" || description === "") {
     alert("Please fill in all fields.");
     return;
   }

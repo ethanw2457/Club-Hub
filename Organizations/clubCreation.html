@@ -196,14 +196,14 @@
   <div class="form-container">
     <form action="" id="profileForm">
       <div class="column-left">
-        <label for="name">Club Name:</label>
+        <label for="name">Club Name: *</label>
         <input type="text" name="name" id="name" required placeholder="Enter your club name">
 
-        <label for="email">Club Email:</label>
+        <label for="email">Club Email: *</label>
         <input type="email" name="email" id="email" required placeholder="Enter your club email">
 
 
-        <label for="ClubCategory">Club Category:</label>
+        <label for="ClubCategory">Club Category: *</label>
         <select name="ClubCategory" id="ClubCategory" required>
           <option value="other">Other</option>
           <option value="Academic">Academic Club</option>
@@ -212,7 +212,7 @@
           <option value="Professional Development">Professional Development Club</option>
           <option value="Athletics">Athletics Club</option>
         </select>
-        <label for="description">Club Description:</label>
+        <label for="description">Club Description: *</label>
         <textarea name="description" id="description" required placeholder="Enter club description"></textarea>
         
         <label for="description">Instagram Link:</label>
@@ -225,7 +225,7 @@
       </div>
 
       <div class="column-right">
-        <label for="photo">Club Profile Picture:</label>
+        <label for="photo">Club Profile Picture: *</label>
         <input type="file" name="photo" id="photo" accept="image/*" onchange="displayProfilePic()">
         <img src="#" alt="Profile Picture" style="display: none;" id="profilePic">
       </div>
