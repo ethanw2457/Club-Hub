@@ -197,58 +197,28 @@
     <form action="" id="profileForm">
       <div class="column-left">
         <label for="name">Full Name: *</label>
-        <input type="text" name="name" id="name" required placeholder="Enter your club name">
-
-        <label for="email">Contact Email: *</label>
-        <input type="email" name="email" id="email" required placeholder="Enter your club email">
-
-
-        <label for="ClubCategory">Club Category: *</label>
+        <input type="text" name="name" id="name" required placeholder="Enter your full name">
+        <label for="ClubCategory">Question type: *</label>
         <select name="ClubCategory" id="ClubCategory" required>
           <option value="Other">Other</option>
-          <option value="Academic">Academic Club</option>
-          <option value="Social">Social Club</option>
-          <option value="Service">Service Club</option>
-          <option value="Professional Development">Professional Development Club</option>
-          <option value="Athletics">Athletics Club</option>
+          <option value="Technical">Technical Issues</option>
+          <option value="Service">Services</option>
+          <option value="Information">Information</option>
+          <option value="Abuse">Abuse</option>
+          <option value="Other">Other</option>
         </select>
-        <label for="description">Club Description: *</label>
-        <textarea name="description" id="description" required placeholder="Enter club description"></textarea>
+      </div>
 
 
       <div class="column-right">
-        <label for="photo">Club Profile Picture: *</label>
-        <input type="file" name="photo" required id="photo" accept="image/*" onchange="displayProfilePic()">
-        <img src="#" alt="Profile Picture" style="display: none;" id="profilePic">
+        <label for="email">Contact Email: *</label>
+        <input type="email" name="email" id="email" required placeholder="Enter your email">
+        <label for="description">Description: *</label>
+        <textarea name="description" id="description" required placeholder="Enter description"></textarea>
+        <input type="submit" action="" class="btn" value="Submit"></button>
       </div>
     </form>
   </div>
-
-  <script>
-    function displayProfilePic() {
-      const input = document.getElementById('photo');
-      const img = document.getElementById('profilePic');
-
-      if (input.files && input.files[0]) {
-        const reader = new FileReader();
-
-        reader.onload = function (e) {
-          img.src = e.target.result;
-          img.style.display = 'block';
-        };
-
-        reader.readAsDataURL(input.files[0]);
-      }
-    }
-
-    function submitForm() {
-      const formData = new FormData(document.getElementById('profileForm'));
-
-      for (const pair of formData.entries()) {
-        console.log(pair[0] + ': ' + pair[1]);
-      }
-    }
-  </script>
 </body>
 </div>
 </html>

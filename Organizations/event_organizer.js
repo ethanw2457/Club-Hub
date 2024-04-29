@@ -1,6 +1,6 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import {getDatabase, ref, set, child, get, remove, update} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-import {getStorage, ref as sref, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
+import {getStorage, ref as sref, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -71,7 +71,7 @@ document.getElementById("eventform").addEventListener("submit", async function(e
     currentArray.push(i);
 
     // Set the modified array back to the database
-    await update(ref(db, "clubs/" + sessionStorage.getItem("currentUser")), {
+    await update(ref(db, "clubs/" + sessionStorage.getItem("currentClub")), {
       clubs: currentArray
     });
   });*/
@@ -86,8 +86,10 @@ document.getElementById("eventform").addEventListener("submit", async function(e
   // Assume AJAX call to send login info to server and save in database
   //const urlParams = new URLSearchParams(window.location.search);
   //Redirect to page that brought user to login page
-  sessionStorage.setItem("currentClub", i);
-  window.location.href = "./clubProfile.html";
+  await update(ref(db, "events/" + i), {
+    club: sessionStorage.getItem("currentClub")
+  })
+  window.location.href = "../eventSelection.html";
 
   //urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';
 });
