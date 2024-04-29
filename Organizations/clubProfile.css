@@ -239,19 +239,24 @@
 .biz_header_top .biz_header_navbar .menu li > ul ul:hover {
   display: block;
 }
-
+/* 
+#006064 darker teal 
+#00acc1 shadow teal 
+#00b8d4 light teal 
+#fff59d nice main yellow
+*/
 .biz_header_top .biz_header_navbar .responsive-menu {
   display: none;
   width: 100%;
   padding: 20px 15px;
-  background: #374147;
+  background: #006064;
   color: #fff;
   text-transform: uppercase;
   font-weight: 600;
 }
 
 .biz_header_top .biz_header_navbar .responsive-menu:hover {
-  background: #374147;
+  background: #006064;
   color: #fff;
   text-decoration: none;
 }
@@ -262,10 +267,11 @@ a.homer {
 
 .biz_header_top .biz_header_navbar .menu li.menu_hide_box {
   display: none;
-}
+}h
 .biz_header_top .biz_header_navbar .menu li.menu_hide_box2 p {
   margin: 0;
 }
+
 .biz_header_top .biz_header_navbar .menu li.menu_hide_box2 p a {
   font-weight: 400;
   padding: 5px 25px;
@@ -357,9 +363,14 @@ a.homer {
   .biz_header_top .biz_header_navbar .menu li a {
     font-size: 12px;
   }
-
+  /* 
+  #006064 darker teal 
+  #00acc1 shadow teal 
+  #00b8d4 light teal 
+  #fff59d nice main yellow
+  */
   a.homer {
-    background: #374147;
+    background: #00b8d4;
   }
   .biz_header_top .biz_header_navbar .menu {
     display: none;
