@@ -51,8 +51,7 @@ snapshot.forEach(childSnapshot => {
 
 console.log(snapshotArray);
 // Iterate over the array using for...of loop
-
-snapshot.forEach(async (childSnapshot) => {
+for (const childSnapshot of snapshotArray) {
   console.log(childSnapshot);
   const eventId = childSnapshot.key;
   //childSnapshot.child('username').val()
@@ -74,6 +73,9 @@ snapshot.forEach(async (childSnapshot) => {
   //const clubHeading = document.createElement('h3');
   const dateHeading = document.createElement('h3');
   const hr = document.createElement('hr');
+  const clubLink = document.createElement('a');
+  clubLink.href = "../Organizations/clubProfile.html";
+  clubLink.innerHTML = "Host Club";
   const descriptionParagraph = document.createElement('p');
   const buttonContainer = document.createElement('span');
   buttonContainer.id = eventId;
@@ -86,6 +88,7 @@ snapshot.forEach(async (childSnapshot) => {
   buttonContainer.appendChild(firstButton);
   buttonContainer.appendChild(secondButton);
 
+
   await get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
     if (snapshot.exists()) {
       nameHeading.textContent = snapshot.val().name;
@@ -93,7 +96,9 @@ snapshot.forEach(async (childSnapshot) => {
       dateHeading.textContent = snapshot.val().date;
       latestGridItem.appendChild(dateHeading);
       latestGridItem.appendChild(hr);
-      descriptionParagraph.innerHTML = snapshot.val().description.replace(/\n/g, "<br>");
+      clubLink.id = eventId + "club" + snapshot.val().club;
+      latestGridItem.appendChild(clubLink);
+      descriptionParagraph.innerHTML = snapshot.val().description;
       latestGridItem.appendChild(descriptionParagraph);
       latestGridItem.appendChild(buttonContainer);
     }
@@ -102,6 +107,10 @@ snapshot.forEach(async (childSnapshot) => {
   document.getElementById(eventId).addEventListener("click", async function(event) {
     // Access the id attribute of the target element
     const id = event.target.id.charAt(event.target.id.length - 1).toString();
+    if (event.target.id.includes("club")) {
+      sessionStorage.setItem("currentClub", id);
+      return;
+    }
     var driverExists = false;
     const driver = await get(child(ref(db), 'events/' + id + '/driver'));
     if (driver.exists() && driver.val() != "") {
@@ -140,7 +149,7 @@ snapshot.forEach(async (childSnapshot) => {
     window.location.href = '/Transport/eventReceipt.html';
   });
 
-});
+}
 
 
 // document.getElementById("button").addEventListener("click", function(event) {
