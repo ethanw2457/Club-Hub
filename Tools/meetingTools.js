@@ -1,3 +1,4 @@
+
 // get CSS Variables
 const styles = getComputedStyle(document.documentElement);
 
@@ -345,3 +346,4 @@ function setInitialPositions() {
     });
   }
 }
+

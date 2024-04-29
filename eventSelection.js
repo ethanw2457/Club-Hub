@@ -47,7 +47,7 @@ console.log(snapshot.val());
 snapshot.forEach(async (childSnapshot) => {
   console.log(childSnapshot);
   const eventId = childSnapshot.key;
-  childSnapshot.child('username').val()
+  //childSnapshot.child('username').val()
   // Create the parent container div
   const latestGridItem = document.createElement('div');
   latestGridItem.classList.add('latest-grid-item');
