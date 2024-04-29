@@ -39,46 +39,42 @@ document.getElementById("eventform").addEventListener("submit", async function(e
   const location = document.getElementById("location").value.trim();
   const description = document.getElementById("description").value.trim();
   const snacks = document.getElementById("snacks").value.trim();
-  const googleclassroom = document.getElementById("Google Classroom").value.trim();
-  const groupme = document.getElementById("GroupMe").value.trim();
-  const imageUploadInput = document.getElementById('photo');
+  const imageUploadInput = document.getElementById('imageUpload');
 
 
   let i = 1;
   let done = false;
   while (!done) {
-    var snapshot = await get(child(ref(db), 'clubs/' + i));
+    var snapshot = await get(child(ref(db), 'events/' + i));
     if (snapshot.exists()) {
       i++;
     } else {
-      await set(ref(db, 'clubs/' + i), {
+      await set(ref(db, 'events/' + i), {
         name: name,
-        email: email,
-        category: category,
+        date: date,
+        location: location,
         description: description,
-        instagram: instagram,
-        googleclassroom: googleclassroom,
-        groupme: groupme
+        snacks: snacks
       });
       done = true;
     }
   }
-  const storageRef = sref(storage, 'clubs/' + i);
+  const storageRef = sref(storage, 'events/' + i);
   const file = imageUploadInput.files[0];
   // 'file' comes from the Blob or File API
   await uploadBytes(storageRef, file);
   //uploadBytes(storageRef, imageUploadInput.files[0]);
-  await get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then(async (snapshot) => {
+  /*await get(child(ref(db), 'clubs/' + sessionStorage.getItem("currentClub"))).then(async (snapshot) => {
     // Get the current array data from the snapshot
-    var currentArray = snapshot.val().clubs || [];
+    var currentArray = snapshot.val().events || [];
     // Iterate through the array items
     currentArray.push(i);
 
     // Set the modified array back to the database
-    await update(ref(db, "users/" + sessionStorage.getItem("currentUser")), {
+    await update(ref(db, "clubs/" + sessionStorage.getItem("currentUser")), {
       clubs: currentArray
     });
-  });
+  });*/
 
   // while (localStorage.getItem("user" + i) !== null) {
   //   i++;
