@@ -42,6 +42,8 @@ get(child(ref(db), 'clubs/' + id)).then((snapshot) => {
   document.getElementById("email").innerHTML = "Email: " + snapshot.val().email;
   document.getElementById("category").innerHTML = "Type: " + snapshot.val().category;
   document.getElementById("description").innerHTML = snapshot.val().description;
+  if (snapshot.val().instagram != "")
+    document.getElemenById("instagram").innerHTML = "Instagram: " + snapshot.val().instagram
   
 });
 

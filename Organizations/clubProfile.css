@@ -666,8 +666,8 @@ header.hero .heading h2 {
   font-family: "VT323";
   font-style: normal;
   font-weight: 400;
-  font-size: 50px;
-  line-height: 50px;
+  font-size: 40px;
+  line-height: 40px;
   color: #ffffff;
 }
 header.hero .heading h3 {
@@ -679,7 +679,7 @@ header.hero .heading h3 {
   font-size: 30px;
   line-height: 30px;
   color: #ffffff;
-  justify-content: center;
+  text-align: center;
 }
 header.hero .paragraph p {
   width: 479px;
@@ -688,7 +688,7 @@ header.hero .paragraph p {
   font-family: "VT323";
   font-style: normal;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 20px;
 
   /* or 125% */
