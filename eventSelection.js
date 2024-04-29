@@ -89,9 +89,8 @@ for (const childSnapshot of snapshotArray) {
   const secondButton = document.createElement('button');
   secondButton.textContent = "Carpool";
   secondButton.id = "carpool" + eventId;
-  buttonContainer.appendChild(firstButton);
   buttonContainer.appendChild(secondButton);
-
+  buttonContainer.appendChild(firstButton);
 
   await get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
     if (snapshot.exists()) {
