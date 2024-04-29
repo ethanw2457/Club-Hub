@@ -80,7 +80,7 @@ document.getElementById("profileForm").addEventListener("submit", async function
   // 'file' comes from the Blob or File API
   await uploadBytes(storageRef, file);
   //uploadBytes(storageRef, imageUploadInput.files[0]);
-  await get(child(ref(db), 'events/' + id)).then(async (snapshot) => {
+  await get(child(ref(db), 'users/' + id)).then(async (snapshot) => {
     // Get the current array data from the snapshot
     var currentArray = snapshot.val().carpoolers || [];
     // Iterate through the array items
