@@ -42,7 +42,7 @@ document.getElementById("profileForm").addEventListener("submit", async function
   const description = document.getElementById("description").value.trim().replace(/\n/g, "<br>");
   const instagram = document.getElementById("Instagram").value.trim();
   const googleclassroom = document.getElementById("Google Classroom").value.trim();
-  const groupme = document.getElementById("Instagram").value.trim();
+  const groupme = document.getElementById("GroupMe").value.trim();
   const imageUploadInput = document.getElementById('photo');
 
 
