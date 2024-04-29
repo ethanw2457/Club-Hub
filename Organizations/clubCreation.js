@@ -30,3 +30,72 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
   img.setAttribute('src', url);
 });
 // End of Header Package================================================================================================
+
+document.getElementById("signupform").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const username = document.getElementById("signupusername").value.trim();
+  const name = document.getElementById("signupname").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("signuppassword").value.trim();
+  const address = document.getElementById("address").value.trim();
+  const phone = document.getElementById("phonenumber").value.trim();
+  const imageUploadInput = document.getElementById('imageUpload');
+
+
+  if (name === "" || username === "" || email === "" || password === "" || address === "") {
+    alert("Please fill in all fields.");
+    return;
+  }
+  if (imageUploadInput.files.length === 0) {
+    alert("Please upload a profile picture.");
+    return;
+  }
+
+  let usernameAlreadyExists = false;
+  var snapshot = await get(child(ref(db), 'users/'));
+  snapshot.forEach((childSnapshot) => {
+    if (childSnapshot.child('username').val() == username)
+      usernameAlreadyExists = true;
+  });
+  if (usernameAlreadyExists) {
+    alert("Username already exists");
+    return;
+  }
+  let i = 1;
+  let done = false;
+  while (!done) {
+    snapshot = await get(child(ref(db), 'users/' + i));
+    if (snapshot.exists()) {
+      i++;
+    } else {
+      await set(ref(db, 'users/' + i), {
+        name: name,
+        username: username,
+        email: email,
+        password: password,
+        address: address,
+        phone: phone,
+        creator: asCreator
+      });
+      done = true;
+    }
+  }
+  const storageRef = sref(storage, 'users/' + i);
+  const file = imageUploadInput.files[0];
+  // 'file' comes from the Blob or File API
+  await uploadBytes(storageRef, file);
+  //uploadBytes(storageRef, imageUploadInput.files[0]);
+  sessionStorage.setItem("currentUser", i);
+  // while (localStorage.getItem("user" + i) !== null) {
+  //   i++;
+  // }
+
+  //document.getElementById("result").innerHTML = localStorage.getItem("user1");
+
+  //localStorage.clear();
+  // Assume AJAX call to send login info to server and save in database
+  const urlParams = new URLSearchParams(window.location.search);
+  //Redirect to page that brought user to login page
+  window.location.href = urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';
+});
