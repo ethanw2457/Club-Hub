@@ -82,9 +82,10 @@ h2 {
 
 .container {
   display: flex;
-  align-items: center;
+  align-items: top;
   justify-content: center;
   height: 100vh;
+  gap: 20px;
 }
 
 /*=============== MENU ===============*/
