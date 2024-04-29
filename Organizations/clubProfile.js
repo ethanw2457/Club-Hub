@@ -43,7 +43,11 @@ get(child(ref(db), 'clubs/' + id)).then((snapshot) => {
   document.getElementById("category").innerHTML = "Type: " + snapshot.val().category;
   document.getElementById("description").innerHTML = snapshot.val().description;
   if (snapshot.val().instagram != "")
-    document.getElemenById("instagram").innerHTML = "Instagram: " + snapshot.val().instagram
+    document.getElementById("instagram").href = "https://" + snapshot.val().instagram;
+  if (snapshot.val().googleclassroom != "")
+    document.getElementById("googleclassroom").href = "https://" + snapshot.val().googleclassroom;
+  if (snapshot.val().groupme != "")
+    document.getElementById("groupme").href = "https://" + snapshot.val().groupme;
   
 });
 
