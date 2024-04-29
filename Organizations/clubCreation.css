@@ -80,7 +80,24 @@ body {
   }
 }
 /*** css body and container section end ***/
+.btn {
+  width: 150px;
+  background-color: #fff59d;
+  border: none;
+  outline: none;
+  height: 49px;
+  border-radius: 49px;
+  color: #171717;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 10px 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
 
+.btn:hover {
+  background-color: #1fc590;
+}
 /*** header section start ***/
 
 .biz_header {
