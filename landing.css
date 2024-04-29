@@ -21,7 +21,7 @@ body {
 }
 
 #header {
-  background: white;
+  background: #fff59d;
   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
   position: fixed;
   top: 0;
@@ -134,7 +134,7 @@ a.highlight {
 main {
   display: flex;
   flex-flow: column-reverse;
-  color: white;
+  color: #fff59d;
   width: 100%;
   margin: 0;
   padding-top: 100px;
@@ -163,7 +163,7 @@ button {
   margin-top: 20px;
   margin-bottom: 50px;
   font-family: "Poppins", sans-serif;
-  background-color: #fff;
+  background-color: #fff59d;
   color: black;
   border: none;
   border-radius: 5px;
@@ -174,7 +174,7 @@ button {
 }
 
 button:hover {
-  background-color: black;
+  background-color: #00acc1;
   color: white;
 }
 
@@ -238,7 +238,7 @@ iframe {
     width: 25px;
     height: 5px;
     content: "";
-    background-color: red;
+    background-color: #00b8d4;
     opacity: 0.7;
 }
 
@@ -247,7 +247,7 @@ iframe {
   margin-right: 60px;
   font-size: 2.125rem;
   font-weight: 700;
-  color: red;
+  color: #00b8d4;
 }
 
 .inner-content-para {
@@ -308,7 +308,7 @@ iframe {
 
 .package .header {
   color: black;
-  border-bottom: 5px red solid;
+  border-bottom: 5px #00b8d4 solid;
   font-size: 1.6em;
   font-weight: 600;
 }
@@ -589,7 +589,7 @@ input[type="email"] {
   margin-right: 60px;
   font-size: 2.125rem;
   font-weight: 700;
-  color: red;
+  color: #00b8d4;
 }
 
 .inner-content-para {
