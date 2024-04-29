@@ -89,8 +89,15 @@ for (const childSnapshot of snapshotArray) {
   const secondButton = document.createElement('button');
   secondButton.textContent = "Carpool";
   secondButton.id = "carpool" + eventId;
+  const info = document.createElement('a');
+  info.href = "../Transport/driver.html";
+  const infoIcon = document.createElement('img');
+  infoIcon.src = "https://static-00.iconduck.com/assets.00/info-circle-icon-512x480-r5cstdbp.png";
+  infoIcon.classList.add("info");
+  info.appendChild(infoIcon);
   buttonContainer.appendChild(secondButton);
   buttonContainer.appendChild(firstButton);
+  buttonContainer.appendChild(info);
 
   await get(child(ref(db), 'events/' + eventId)).then((snapshot) => {
     if (snapshot.exists()) {

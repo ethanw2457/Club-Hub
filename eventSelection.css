@@ -641,6 +641,11 @@ button {
   font-size: 1.1rem;
 
 }
+
+.info {
+  max-width: 25px;
+  max-height: 25px;
+}
 /* 
 #006064 darker teal 
 #00acc1 shadow teal 
