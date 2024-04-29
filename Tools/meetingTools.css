@@ -236,8 +236,8 @@ main {
 #bottle-images-and-info-container {
   position: relative;
   display: flex;
-
-  width: 120%;
+ /* very importnat */
+  width: 100%;
   max-width: 30rem;
   margin: 0 auto;
   justify-content: center;
@@ -304,9 +304,9 @@ main {
 
 #direction-button-container {
   position: absolute;
-  width: 60%;
+  width: 80%; /* very important */
   height: 100%;
-  max-width: 25rem;
+  max-width: 50rem;
   z-index: 1;
   background-color: transparent;
   pointer-events: none;
@@ -380,7 +380,7 @@ main {
 /* top prevent borders from crosslaping the prev and next button*/
 .box {
   position: absolute;
-  width: 100%;
+  width: 120%;
   height: calc(50% - (var(--direction-buttons-width) / 2) - 5px);
   border: var(--border-width) solid black;
   border-top: 0px;
