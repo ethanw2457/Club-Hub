@@ -23,7 +23,16 @@ var driverId;
 await get(child(ref(db), 'events/' + sessionStorage.getItem("currentEvent"))).then((snapshot) => {
   driverId = snapshot.val().driver;
 });
-
+await getDownloadURL(sref(storage, 'users/' + driverId))
+.then((url) => {
+  document.getElementById("driverPhoto").src = url;
+});
+await get(child(ref(db), 'users/' + driverId)).then((snapshot) => {
+  if (snapshot.exists()) {
+    document.getElementById("drivername").innerHTML = snapshot.val().name;
+    document.getElementById("driverinfo").innerHTML = "Driver<br>" + snapshot.val().phone + "<br>" + snapshot.val().email + "<br>" + snapshot.val().address;
+  }
+});
 var carpoolers = [];
 // var carpoolernames = [];
 // var carpoolerdescriptions = [];
