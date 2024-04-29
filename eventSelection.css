@@ -655,6 +655,7 @@ li,a,p,button {
   color: black;
   text-decoration: none;
   list-style: none;
+  margin-left: 10px;
 }
 
 button {

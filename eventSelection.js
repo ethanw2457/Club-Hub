@@ -58,7 +58,7 @@ for (const childSnapshot of snapshotArray) {
   // Create the parent container div
   const latestGridItem = document.createElement('div');
   latestGridItem.classList.add('latest-grid-item');
-
+  latestGridItem.id = eventId;
   await getDownloadURL(sref(storage, 'events/' + eventId))
   .then((url) => {
 
@@ -78,7 +78,7 @@ for (const childSnapshot of snapshotArray) {
   clubLink.innerHTML = "Host Club";
   const descriptionParagraph = document.createElement('p');
   const buttonContainer = document.createElement('span');
-  buttonContainer.id = eventId;
+  //buttonContainer.id = eventId;
   const firstButton = document.createElement('button');
   firstButton.textContent = "Drive";
   firstButton.id = "driver" + eventId;
@@ -98,7 +98,7 @@ for (const childSnapshot of snapshotArray) {
       latestGridItem.appendChild(hr);
       clubLink.id = eventId + "club" + snapshot.val().club;
       latestGridItem.appendChild(clubLink);
-      descriptionParagraph.innerHTML = snapshot.val().description;
+      descriptionParagraph.innerHTML = "Location: " + snapshot.val().location + "<br>Snacks: " + snapshot.val().snacks + "<br>Description: " + snapshot.val().description;
       latestGridItem.appendChild(descriptionParagraph);
       latestGridItem.appendChild(buttonContainer);
     }
@@ -126,8 +126,10 @@ for (const childSnapshot of snapshotArray) {
           driver: sessionStorage.getItem("currentUser")
         });
       }
+      sessionStorage.setItem("currentEvent", id);
+      window.location.href = '/Transport/eventReceipt.html';
     }
-    else {
+    else if (event.target.id.includes("carpool")) {
       if (!driverExists) {
         alert("There is no driver for this event. Wait for a driver to sign up or sign up as a driver yourself.")
         return;
@@ -143,10 +145,10 @@ for (const childSnapshot of snapshotArray) {
           carpoolers: currentArray
         });
       });
-      
+      sessionStorage.setItem("currentEvent", id);
+      window.location.href = '/Transport/eventReceipt.html';
     }
-    sessionStorage.setItem("currentEvent", id);
-    window.location.href = '/Transport/eventReceipt.html';
+    
   });
 
 }
