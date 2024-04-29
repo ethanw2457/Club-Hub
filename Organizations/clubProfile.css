@@ -720,16 +720,11 @@ strong.api:hover {
 }
 .img p {
 }
-img.profile {
-  -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(100%);
-}
+
 img.profile:hover {
   mix-blend-mode: normal;
   border: 3px solid #000000;
   box-shadow: 5px 5px 0px #ff5050;
-  -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
-  filter: grayscale(0%);
   transition: 0.2s;
 }
 
