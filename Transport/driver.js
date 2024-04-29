@@ -1,4 +1,5 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+import {getDatabase, ref, set, child, get, remove, update} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 import {getStorage, ref as sref, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -15,7 +16,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-
+const db = getDatabase(app);
 
 document.getElementById("sign-out").addEventListener('click', signOut);
 
@@ -28,6 +29,11 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
   // Or inserted into an <img> element
   const img = document.getElementById('profile-pic');
   img.setAttribute('src', url);
+});
+get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then((snapshot) => {
+  if (!snapshot.val().creator)
+    document.getElementById("createClub").style.display = "none";
+
 });
 // End of Header Package================================================================================================
 document.getElementById("loginform").addEventListener("submit", function(event) {
