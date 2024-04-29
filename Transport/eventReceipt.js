@@ -18,7 +18,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const storage = getStorage(app);
 
-sessionStorage.getItem("currentEvent", "1");
+sessionStorage.setItem("currentEvent", "1");
 var driverId;
 var driverAddress;
 var carpoolers = [];
