@@ -42,32 +42,29 @@ await get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then
   events = snapshot.val().events || [];
 });
 if (events.length == 0) {
-  const noRiders = document.createElement("h1");
-  noRiders.innerHTML = "There are currently no riders for this event.";
-  document.getElementById("carpoolers").appendChild(noRiders);
+  document.getElementById("noEventsMessage").innerHTML = "You are currently not signed up to carpool for any events.";
 }
 else {
   for (let i = 0; i < events.length; i++) {
-    const span = document.createElement("span");
-
-    await getDownloadURL(sref(storage, 'users/' + events[i]))
-    .then((url) => {
-      if (url) {
-        const img = document.createElement('img');
-        img.classList.add("header-img");
-        img.src = url;
-        span.appendChild(img);
-      }
-    });
-    await get(child(ref(db), 'users/' + events[i])).then((snapshot) => {
+    const span = document.createElement("div");
+    span.id = events[i];
+    span.classList.add("packages");
+    await get(child(ref(db), 'events/' + events[i])).then((snapshot) => {
       if (snapshot.exists()) {
         const name = document.createElement("h1");
         name.innerHTML = snapshot.val().name;
         span.appendChild(name);
-        const description = document.createElement("h2");
-        description.innerHTML = "Carpooler<br>" + snapshot.val().phone + "<br>" + snapshot.val().email + "<br>" + snapshot.val().address;
-        span.appendChild(description);
-        carpoolAddresses.push(snapshot.val().address);
+        const club = document.createElement("a");
+        const hostClub = document.createElement("h2");
+        hostClub.classList.add("text1");
+        club.appendChild(hostClub);
+        club.setAttribute("href", "../Organizations/clubProfile.html");
+        club.id = events[i] + "club" + snapshot.val().club;
+        span.appendChild(club);
+        const list = document.createElement("ul");
+        list.classList.add("list");
+        const date = document.createElement("li");
+        
       }
     });
     document.getElementById("carpoolers").appendChild(span);
