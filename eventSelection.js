@@ -107,9 +107,13 @@ snapshot.forEach(async (childSnapshot) => {
   document.getElementById(eventId).addEventListener("click", async function(event) {
     // Access the id attribute of the target element
     const id = event.target.id.charAt(event.target.id.length - 1).toString();
+    var driverExists = false;
+    const driver = await get(child(ref(db), 'events/' + id + '/driver'));
+    if (driver.exists() && driver.val() != "") {
+      driverExists = true;
+    }
     if (event.target.id.includes("driver")) {
-      const driver = await get(child(ref(db), 'events/' + id + '/driver'));
-      if (driver.exists() && driver.val() != "") {
+      if (driverExists) {
         alert("There is already a driver for this event.");
         return;
       }
@@ -120,7 +124,10 @@ snapshot.forEach(async (childSnapshot) => {
       }
     }
     else {
-      
+      if (!driverExists) {
+        alert("There is no driver for this event. Wait for a driver to sign up or sign up as a driver yourself.")
+        return;
+      }
       await get(child(ref(db), 'events/' + id)).then(async (snapshot) => {
         // Get the current array data from the snapshot
         var currentArray = snapshot.val().carpoolers || [];
@@ -134,7 +141,8 @@ snapshot.forEach(async (childSnapshot) => {
       });
       
     }
-    window.location.href = '/Transport/eventReceipt.html?event=' + id;
+    sessionStorage.setItem("currentEvent", id);
+    window.location.href = '/Transport/eventReceipt.html';
   });
 
 });
