@@ -233,20 +233,6 @@
   min-height: 240px;
 }
 
-/*.menu ul:after {
-    bottom: 100%;
-    left: 20%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #fff;
-    border-width: 6px;
-    margin-left: -6px;
-}*/
 
 .biz_header_top .biz_header_navbar .menu ul li {
   display: block;
@@ -286,20 +272,6 @@
   display: none;
 }
 
-/*.menu ul ul:after {
-    left: -6px;
-    top: 10%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(255, 255, 255, 0);
-    border-right-color: #fff;
-    border-width: 6px;
-    margin-top: -6px;
-}*/
 
 .biz_header_top .biz_header_navbar .menu li>ul ul:hover {
   display: block;

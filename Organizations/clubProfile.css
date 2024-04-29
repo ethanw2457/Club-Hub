@@ -201,21 +201,6 @@
   min-height: 240px;
 }
 
-/*.menu ul:after {
-    bottom: 100%;
-    left: 20%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(255, 255, 255, 0);
-    border-bottom-color: #fff;
-    border-width: 6px;
-    margin-left: -6px;
-}*/
-
 .biz_header_top .biz_header_navbar .menu ul li {
   display: block;
   float: none;
@@ -250,21 +235,6 @@
   position: absolute;
   display: none;
 }
-
-/*.menu ul ul:after {
-    left: -6px;
-    top: 10%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(255, 255, 255, 0);
-    border-right-color: #fff;
-    border-width: 6px;
-    margin-top: -6px;
-}*/
 
 .biz_header_top .biz_header_navbar .menu li > ul ul:hover {
   display: block;
@@ -565,20 +535,20 @@ body {
 }
 
 .logo {
-  width: 150px; /* Adjust the size of the circular frame */
-  height: 150px; /* Adjust the size of the circular frame */
-  border-radius: 50%; /* Makes the frame circular */
-  overflow: hidden; /* Clips the content inside the frame */
-  border: 2px solid #fff; /* Optional: Add a border to the frame */
-  display: flex; /* Use flexbox */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  width: 150px; 
+  height: 150px; 
+  border-radius: 50%; 
+  overflow: hidden; 
+  border: 2px solid #fff; 
+  display: flex; 
+  justify-content: center;
+  align-items: center; 
 }
 
 .profile {
-  width: 100%; /* Ensures the image fills the circular frame */
-  height: 100%; /* Ensures the image fills the circular frame */
-  object-fit: cover; /* Maintains aspect ratio and covers the entire frame */
+  width: 100%; 
+  height: 100%;
+  object-fit: cover; 
 }
 
 /* navbar */
