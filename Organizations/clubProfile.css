@@ -679,6 +679,7 @@ header.hero .heading h3 {
   font-size: 30px;
   line-height: 30px;
   color: #ffffff;
+  justify-content: center;
 }
 header.hero .paragraph p {
   width: 479px;
