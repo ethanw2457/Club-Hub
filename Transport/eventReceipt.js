@@ -1,7 +1,7 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import {getDatabase, ref, set, child, get, remove, update} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 import {getStorage, ref as sref, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
-// Header Package=============================================================================================================
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: "AIzaSyDjMBUC1EhrOSzzgId-sglmdmJJ4kCyV5Q",
@@ -19,37 +19,44 @@ const db = getDatabase(app);
 const storage = getStorage(app);
 
 
-document.getElementById("sign-out").addEventListener('click', signOut);
+var driverId;
+await get(child(ref(db), 'events/' + sessionStorage.getItem("currentEvent"))).then((snapshot) => {
+  driverId = snapshot.val().driver;
+});
 
-function signOut() {
-  sessionStorage.setItem("currentUser", "");
+var carpoolers = [];
+// var carpoolernames = [];
+// var carpoolerdescriptions = [];
+await get(child(ref(db), 'events/' + sessionStorage.getItem("currentEvent"))).then((snapshot) => {
+  carpoolers = snapshot.val().carpoolers || [];
+});
+if (carpoolers.length == 0) {
+  const noRiders = document.createElement("h1");
+  noRiders.innerHTML = "There are currently no riders for this event.";
+  document.getElementById("carpoolers").appendChild(noRiders);
 }
-getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
-.then((url) => {
+else {
+  for (let i = 0; i < carpoolers.length; i++) {
+    await getDownloadURL(sref(storage, 'events/' + eventId))
+    .then((url) => {
 
-  // Or inserted into an <img> element
-  const img = document.getElementById('profile-pic');
-  img.setAttribute('src', url);
-});
-get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then((snapshot) => {
-  if (!snapshot.val().creator)
-    document.getElementById("createClub").style.display = "none";
+      // Or inserted into an <img> element
+      const img = document.createElement('img');
+      img.src = url;
+      latestGridItem.appendChild(img);
 
-});
-// End of Header Package================================================================================================
+    });
+    await get(child(ref(db), 'users/' + carpoolers[i])).then((snapshot) => {
+      if (snapshot.exists()) {
+        snapshot.val().name
+        
+        carpoolerdescriptions.push(snapshot.val().description);
+      }
+    });
+  }
+}
 
-document.getElementById("eventname").innerHTML = localStorage.getItem("event");
-document.getElementById("eventdetails").innerHTML = "Location: " + localStorage.getItem("eventaddress") + "<br>Date: " + localStorage.getItem("eventdate");
-document.getElementById("eventdesc").innerHTML = localStorage.getItem("eventdesc");
-const drivernum = localStorage.getItem("driver");
-const cpnum = localStorage.getItem("currentuser");
-document.getElementById("driver").innerHTML = localStorage.getItem("user" + drivernum);
-document.getElementById("driverinfo").innerHTML = "Driver" + "<br>" + localStorage.getItem("phone" + drivernum) + "<br>" + localStorage.getItem("email" + drivernum) + "<br>" + localStorage.getItem("address" + drivernum);
-document.getElementById("carpoolerinfo").innerHTML = "Carpooler" + "<br>" + localStorage.getItem("email" + cpnum) + "<br>" + localStorage.getItem("address" + cpnum);
-document.getElementById("carpooler").innerHTML = localStorage.getItem("user" + cpnum);
-
-
-export function initMap() {
+function initMap() {
   const directionsService = new google.maps.DirectionsService();
   const directionsRenderer = new google.maps.DirectionsRenderer();
   const map = new google.maps.Map(document.getElementById("map"), {
