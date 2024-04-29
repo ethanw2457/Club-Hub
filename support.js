@@ -1,5 +1,6 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import {getStorage, ref as sref, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
+import {getDatabase, ref, set, child, get, remove, update} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+import {getStorage, ref as sref, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -14,6 +15,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 const storage = getStorage(app);
 
 
@@ -30,51 +32,70 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
   img.setAttribute('src', url);
 });
 // End of Header Package================================================================================================
-// Focus first input field
-document.getElementById('fullName').focus();
 
-// Skill check challenge
+document.getElementById("profileForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
 
-function expertCheck() {
-    // Get the checkbox
-    let checkBoxExpert = document.getElementById('skillExpert');
-   let checkBoxNovice = document.getElementById('skillBeginner');
-    let skillChallengeFormClass = document.getElementsByClassName('skill-check')[0];
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const category = document.getElementById("ClubCategory").value.trim();
+  const description = document.getElementById("description").value.trim().replace(/\n/g, "<br>");
+  const instagram = document.getElementById("Instagram").value.trim();
+  const googleclassroom = document.getElementById("Google Classroom").value.trim();
+  const groupme = document.getElementById("GroupMe").value.trim();
+  const imageUploadInput = document.getElementById('photo');
 
-    // If the checkbox is checked, display the output text
-    if (checkBoxExpert.checked == true) {
-         if (skillChallengeFormClass.classList.contains('skill-check')) {
-              skillChallengeFormClass.classList.add('d-block');
-          }
+
+
+
+  let i = 1;
+  let done = false;
+  while (!done) {
+    var snapshot = await get(child(ref(db), 'clubs/' + i));
+    if (snapshot.exists()) {
+      i++;
+    } else {
+      await set(ref(db, 'clubs/' + i), {
+        name: name,
+        email: email,
+        category: category,
+        description: description,
+        instagram: instagram,
+        googleclassroom: googleclassroom,
+        groupme: groupme
+      });
+      done = true;
     }
   }
+  const storageRef = sref(storage, 'clubs/' + i);
+  const file = imageUploadInput.files[0];
+  // 'file' comes from the Blob or File API
+  await uploadBytes(storageRef, file);
+  //uploadBytes(storageRef, imageUploadInput.files[0]);
+  await get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then(async (snapshot) => {
+    // Get the current array data from the snapshot
+    var currentArray = snapshot.val().clubs || [];
+    // Iterate through the array items
+    currentArray.push(i);
 
-function beginnerCheck() {
-  // Get the checkbox
-  let checkBoxNovice = document.getElementById('skillBeginner');
-  let skillChallengeFormClass = document.getElementsByClassName(
-    'skill-check',
-  )[0];
+    // Set the modified array back to the database
+    await update(ref(db, "users/" + sessionStorage.getItem("currentUser")), {
+      clubs: currentArray
+    });
+  });
 
-  // If the checkbox is checked, display the output text
-  if (checkBoxNovice.checked == true) {
-    if (skillChallengeFormClass.classList.contains('skill-check')) {
-      skillChallengeFormClass.classList.remove('d-block');
-    }
-  }
-}
+  // while (localStorage.getItem("user" + i) !== null) {
+  //   i++;
+  // }
 
-// Form hover focus
+  //document.getElementById("result").innerHTML = localStorage.getItem("user1");
 
-document.getElementsByClassName('form-container')[0].onmouseover = function() { mouseOver() };
-document.getElementsByClassName('form-container')[0].onmouseout = function() { mouseOut() };
+  //localStorage.clear();
+  // Assume AJAX call to send login info to server and save in database
+  //const urlParams = new URLSearchParams(window.location.search);
+  //Redirect to page that brought user to login page
+  sessionStorage.setItem("currentClub", i);
+  window.location.href = "./clubProfile.html";
 
-function mouseOver() {
-  document.getElementsByClassName('form-container')[0].classList.add('focus-form');
-  document.getElementsByTagName('body')[0].classList.add('form-is-focused');
-}
-
-function mouseOut() {
-  document.getElementsByClassName('form-container')[0].classList.remove('focus-form');
-  document.getElementsByTagName('body')[0].classList.remove('form-is-focused');
-}
+  //urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';
+});
