@@ -39,7 +39,7 @@ document.getElementById("profileForm").addEventListener("submit", async function
   const name = document.getElementById("name").value.trim();
   const email = document.getElementById("email").value.trim();
   const category = document.getElementById("ClubCategory").value.trim();
-  const address = document.getElementById("address").value.trim();
+  const description = document.getElementById("description").value.trim()..replace(/\n/g, "<br>");;
   const phone = document.getElementById("phonenumber").value.trim();
   const imageUploadInput = document.getElementById('photo');
 
