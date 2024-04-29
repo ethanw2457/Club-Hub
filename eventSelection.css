@@ -644,10 +644,15 @@ a.homer {
 h1,h2,h3 {
   font-family: 'Space Mono';
 }
-
+/* 
+#006064 darker teal 
+#00acc1 shadow teal 
+#00b8d4 light teal 
+#fff59d nice main yellow
+*/
 body {
-  border-left: 10px solid #fff59d;
-  border-right: 10px solid #fff59d;
+  border-left: 10px solid #00acc1;
+  border-right: 10px solid #00acc1;
 }
 
 li,a,p,button {
@@ -666,10 +671,16 @@ button {
   font-size: 1.1rem;
 
 }
-
+/* 
+#006064 darker teal 
+#00acc1 shadow teal 
+#00b8d4 light teal 
+#fff59d nice main yellow
+*/
 .wrapper {
   width: 90%;
   margin: 0 auto;
+  background-color: #fff59d;
 }
 
 .latest-grid {
@@ -683,6 +694,7 @@ button {
   flex-basis: calc(30% - 10px);
   margin: 20px 0;
   border: 2px solid black;
+  background-color: #fff;
 }
 
 .latest-grid-item h2,h3,p,hr,button {
