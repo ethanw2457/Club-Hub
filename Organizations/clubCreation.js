@@ -55,31 +55,22 @@ document.getElementById("profileForm").addEventListener("submit", async function
     return;
   }
 
-  let usernameAlreadyExists = false;
-  var snapshot = await get(child(ref(db), 'users/'));
-  snapshot.forEach((childSnapshot) => {
-    if (childSnapshot.child('username').val() == username)
-      usernameAlreadyExists = true;
-  });
-  if (usernameAlreadyExists) {
-    alert("Username already exists");
-    return;
-  }
+  
   let i = 1;
   let done = false;
   while (!done) {
-    snapshot = await get(child(ref(db), 'users/' + i));
+    snapshot = await get(child(ref(db), 'clubs/' + i));
     if (snapshot.exists()) {
       i++;
     } else {
-      await set(ref(db, 'users/' + i), {
+      await set(ref(db, 'clubs/' + i), {
         name: name,
-        username: username,
         email: email,
-        password: password,
-        address: address,
-        phone: phone,
-        creator: asCreator
+        category: category,
+        description: description,
+        instagram: instagram,
+        googleclassroom: googleclassroom,
+        groupme: groupme
       });
       done = true;
     }
