@@ -1,5 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@100;200;300;400;500&family=Poppins:wght@300;400;500;600;700;800&display=swap");
-
+/* 
+#006064 darker teal 
+#00acc1 shadow teal 
+#00b8d4 light teal 
+#fff59d nice main yellow
+*/
 :root {
   font-size: 16px;
   font-family: "Poppins";
@@ -52,7 +57,12 @@ a {
   color: blue;
   text-decoration: none; /* no underline */
 }
-
+/* 
+#006064 darker teal 
+#00acc1 shadow teal 
+#00b8d4 light teal 
+#fff59d nice main yellow
+*/
 body {
   position: relative;
   background-color: var(--spirulina);
