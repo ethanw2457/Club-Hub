@@ -1,4 +1,5 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+import {getDatabase, ref, set, child, get, remove, update} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 import {getStorage, ref as sref, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -15,7 +16,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
-
+const db = getDatabase(app);
 
 document.getElementById("sign-out").addEventListener('click', signOut);
 
@@ -30,27 +31,17 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
   img.setAttribute('src', url);
 });
 // End of Header Package================================================================================================
-document.getElementById("profileForm").addEventListener("submit", async function(event) {
+document.getElementById("eventform").addEventListener("submit", async function(event) {
   event.preventDefault();
 
   const name = document.getElementById("name").value.trim();
-  const email = document.getElementById("email").value.trim();
-  const category = document.getElementById("ClubCategory").value.trim();
-  const description = document.getElementById("description").value.trim().replace(/\n/g, "<br>");
-  const instagram = document.getElementById("Instagram").value.trim();
+  const date = document.getElementById("date").value.trim();
+  const location = document.getElementById("location").value.trim();
+  const description = document.getElementById("description").value.trim();
+  const snacks = document.getElementById("snacks").value.trim();
   const googleclassroom = document.getElementById("Google Classroom").value.trim();
   const groupme = document.getElementById("GroupMe").value.trim();
   const imageUploadInput = document.getElementById('photo');
-
-
-  if (name === "" || email === "" || category === "" || description === "") {
-    alert("Please fill in all fields.");
-    return;
-  }
-  if (imageUploadInput.files.length === 0) {
-    alert("Please upload a profile picture.");
-    return;
-  }
 
 
   let i = 1;

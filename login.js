@@ -61,15 +61,6 @@ document.getElementById("signupform").addEventListener("submit", async function(
   const phone = document.getElementById("phonenumber").value.trim();
   const imageUploadInput = document.getElementById('imageUpload');
 
-  
-  if (name === "" || username === "" || email === "" || password === "" || address === "") {
-    alert("Please fill in all fields.");
-    return;
-  }
-  if (imageUploadInput.files.length === 0) {
-    alert("Please upload a profile picture.");
-    return;
-  }
 
   let usernameAlreadyExists = false;
   var snapshot = await get(child(ref(db), 'users/'));
@@ -125,10 +116,6 @@ document.getElementById("signinform").addEventListener("submit", async function(
   const username = document.getElementById("signinusername").value.trim();
   const password = document.getElementById("signinpassword").value.trim();
 
-  if (username === "" || password === "") {
-    alert("Please fill in all fields.");
-    return;
-  }
   var passwordCorrect = false;
   var i = "";
   var snapshot = await get(child(ref(db), 'users/'));
