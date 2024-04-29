@@ -75,12 +75,23 @@ document.getElementById("profileForm").addEventListener("submit", async function
       done = true;
     }
   }
-  const storageRef = sref(storage, 'users/' + i);
+  const storageRef = sref(storage, 'clubs/' + i);
   const file = imageUploadInput.files[0];
   // 'file' comes from the Blob or File API
   await uploadBytes(storageRef, file);
   //uploadBytes(storageRef, imageUploadInput.files[0]);
-  sessionStorage.setItem("currentUser", i);
+  await get(child(ref(db), 'events/' + id)).then(async (snapshot) => {
+    // Get the current array data from the snapshot
+    var currentArray = snapshot.val().carpoolers || [];
+    // Iterate through the array items
+    currentArray.push(sessionStorage.getItem("currentUser"));
+
+    // Set the modified array back to the database
+    await update(ref(db, "events/" + id + "/"), {
+      carpoolers: currentArray
+    });
+  });
+
   // while (localStorage.getItem("user" + i) !== null) {
   //   i++;
   // }
