@@ -1,6 +1,6 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import {getDatabase, ref, set, child, get, remove, update} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-import {getStorage, ref as sref, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
+import {getStorage, ref as sref, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
@@ -59,7 +59,7 @@ document.getElementById("profileForm").addEventListener("submit", async function
   let i = 1;
   let done = false;
   while (!done) {
-    snapshot = await get(child(ref(db), 'clubs/' + i));
+    var snapshot = await get(child(ref(db), 'clubs/' + i));
     if (snapshot.exists()) {
       i++;
     } else {
@@ -88,7 +88,7 @@ document.getElementById("profileForm").addEventListener("submit", async function
 
     // Set the modified array back to the database
     await update(ref(db, "users/" + sessionStorage.getItem("currentUser")), {
-      carpoolers: currentArray
+      clubs: currentArray
     });
   });
 
