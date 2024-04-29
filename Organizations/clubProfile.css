@@ -774,6 +774,20 @@ img.profile:hover {
     color: #ffffff;
     text-align: center;
   }
+  header.hero .heading h2 {
+    width: auto;
+    height: auto;
+
+    font-family: "VT323";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 50px;
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  
   header.hero .paragraph p {
     width: auto;
     height: 110px;
