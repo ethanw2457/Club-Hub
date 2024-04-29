@@ -30,29 +30,77 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
   img.setAttribute('src', url);
 });
 // End of Header Package================================================================================================
-document.getElementById("eventform").addEventListener("submit", function(event) {
-  event.preventDefault(); 
+document.getElementById("profileForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
 
   const name = document.getElementById("name").value.trim();
-  const date = document.getElementById("date").value.trim();
-  const address = document.getElementById("address").value.trim();
-  const desc = document.getElementById("description").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const category = document.getElementById("ClubCategory").value.trim();
+  const description = document.getElementById("description").value.trim().replace(/\n/g, "<br>");
+  const instagram = document.getElementById("Instagram").value.trim();
+  const googleclassroom = document.getElementById("Google Classroom").value.trim();
+  const groupme = document.getElementById("GroupMe").value.trim();
+  const imageUploadInput = document.getElementById('photo');
 
 
-  if (name === "" || date === "" || address === "" || desc === "") {
+  if (name === "" || email === "" || category === "" || description === "") {
     alert("Please fill in all fields.");
     return;
   }
-
-  localStorage.setItem("event", name)
-  localStorage.setItem("eventdate", date);
-  localStorage.setItem("eventaddress", address);
-  localStorage.setItem("eventdesc", desc);
-
+  if (imageUploadInput.files.length === 0) {
+    alert("Please upload a profile picture.");
+    return;
+  }
 
 
-  alert("Event added successfully!");
+  let i = 1;
+  let done = false;
+  while (!done) {
+    var snapshot = await get(child(ref(db), 'clubs/' + i));
+    if (snapshot.exists()) {
+      i++;
+    } else {
+      await set(ref(db, 'clubs/' + i), {
+        name: name,
+        email: email,
+        category: category,
+        description: description,
+        instagram: instagram,
+        googleclassroom: googleclassroom,
+        groupme: groupme
+      });
+      done = true;
+    }
+  }
+  const storageRef = sref(storage, 'clubs/' + i);
+  const file = imageUploadInput.files[0];
+  // 'file' comes from the Blob or File API
+  await uploadBytes(storageRef, file);
+  //uploadBytes(storageRef, imageUploadInput.files[0]);
+  await get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then(async (snapshot) => {
+    // Get the current array data from the snapshot
+    var currentArray = snapshot.val().clubs || [];
+    // Iterate through the array items
+    currentArray.push(i);
 
+    // Set the modified array back to the database
+    await update(ref(db, "users/" + sessionStorage.getItem("currentUser")), {
+      clubs: currentArray
+    });
+  });
 
-  window.location.href = "./carpoolHub.html";
+  // while (localStorage.getItem("user" + i) !== null) {
+  //   i++;
+  // }
+
+  //document.getElementById("result").innerHTML = localStorage.getItem("user1");
+
+  //localStorage.clear();
+  // Assume AJAX call to send login info to server and save in database
+  //const urlParams = new URLSearchParams(window.location.search);
+  //Redirect to page that brought user to login page
+  sessionStorage.setItem("currentClub", i);
+  window.location.href = "./clubProfile.html";
+
+  //urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';
 });
