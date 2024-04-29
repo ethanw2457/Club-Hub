@@ -17,7 +17,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const storage = getStorage(app);
-
+sessionStorage.setItem("currentUser", "3");
 
 document.getElementById("sign-out").addEventListener('click', signOut);
 
@@ -57,6 +57,7 @@ else {
         const club = document.createElement("a");
         const hostClub = document.createElement("h2");
         hostClub.classList.add("text1");
+        hostClub.innerHTML = "Host Club";
         club.appendChild(hostClub);
         club.setAttribute("href", "../Organizations/clubProfile.html");
         club.id = events[i] + "club" + snapshot.val().club;
@@ -64,18 +65,38 @@ else {
         const list = document.createElement("ul");
         list.classList.add("list");
         const date = document.createElement("li");
-        
+        date.classList.add("first");
+        date.innerHTML = snapshot.val().date;
+        list.appendChild(date);
+        const location = document.createElement("li");
+        location.innerHTML = snapshot.val().location;
+        list.appendChild(location);
+        const numCarpoolers = document.createElement("li");
+        //Assuming only one driver, # carpoolers is 1 + riders
+        numCarpoolers.innerHTML = (snapshot.val().carpoolers.length + 1) + " Carpoolers";
+        list.appendChild(numCarpoolers);
+        span.appendChild(list);
+        const button = document.createElement("a");
+        button.classList.add("button");
+        button.classList.add("button1");
+        button.href = "./eventReceipt.html";
+        button.innerHTML = "View";
+        button.id = "event" + events[i];
+        span.appendChild(button);
       }
     });
-    document.getElementById("carpoolers").appendChild(span);
+    document.getElementById("container").appendChild(span);
+    document.getElementById(events[i]).addEventListener("click", function(event) {
+      // Access the id attribute of the target element
+      const id = event.target.id.charAt(event.target.id.length - 1).toString();
+      if (event.target.id.includes("club")) {
+        sessionStorage.setItem("currentClub", id);
+        return;
+      }
+      else if (event.target.id.includes("event")) {
+        sessionStorage.setIteam("currentEvent", id);
+        return;
+      }
+    });
   }
-}
-
-clubLink.id = eventId + "club" + snapshot.val().club;
-document.getElementById(eventId).addEventListener("click", async function(event) {
-// Access the id attribute of the target element
-const id = event.target.id.charAt(event.target.id.length - 1).toString();
-if (event.target.id.includes("club")) {
-  sessionStorage.setItem("currentClub", id);
-  return;
 }
