@@ -1050,9 +1050,6 @@ input[type="email"] {
     max-width: 80vw;
   }
 
-  .menu-container {
-    max-width: 100vw;
-  }
 
   header {
     display: flex;
