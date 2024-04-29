@@ -652,12 +652,33 @@ header.hero .heading h1 {
   text-transform: uppercase;
   color: #ffffff;
 }
+
 h1 strong {
   color: #ff5050;
 }
 h1 strong:hover {
   text-shadow: 5px 3px 0px #000000;
   transition: 0.5s ease;
+}
+header.hero .heading h2 {
+  width: 500px;
+  height: auto;
+  font-family: "VT323";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 50px;
+  color: #ffffff;
+}
+header.hero .heading h3 {
+  width: 500px;
+  height: auto;
+  font-family: "VT323";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 30px;
+  color: #ffffff;
 }
 header.hero .paragraph p {
   width: 479px;
@@ -772,19 +793,7 @@ img.profile:hover {
     color: #ffffff;
     text-align: center;
   }
-  header.hero .heading h2 {
-    width: auto;
-    height: auto;
-
-    font-family: "VT323";
-    font-style: normal;
-    font-weight: 400;
-    font-size: 50px;
-    line-height: 50px;
-    text-transform: uppercase;
-    color: #ffffff;
-    text-align: center;
-  }
+  
   
   
   header.hero .paragraph p {
