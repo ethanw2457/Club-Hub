@@ -18,10 +18,23 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
 const storage = getStorage(app);
 
-
+sessionStorage.getItem("currentEvent", "1");
 var driverId;
+var driverAddress;
+var carpoolers = [];
+var carpoolAddresses = [];
+var eventLocation;
+await getDownloadURL(sref(storage, 'events/' + sessionStorage.getItem("currentEvent")))
+.then((url) => {
+  document.getElementById("eventPhoto").src = url;
+});
 await get(child(ref(db), 'events/' + sessionStorage.getItem("currentEvent"))).then((snapshot) => {
   driverId = snapshot.val().driver;
+  carpoolers = snapshot.val().carpoolers || [];
+  eventLocation = snapshot.val().location;
+  document.getElementById("eventname").innerHTML = snapshot.val().name;
+  document.getElementById("eventdetails").innerHTML = snapshot.val().date;
+  document.getElementById("eventdesc").innerHTML = "Location: " + snapshot.val().location + "<br>Snacks: " + snapshot.val().snacks + "<br>Description: " + snapshot.val().description;
 });
 await getDownloadURL(sref(storage, 'users/' + driverId))
 .then((url) => {
@@ -31,9 +44,10 @@ await get(child(ref(db), 'users/' + driverId)).then((snapshot) => {
   if (snapshot.exists()) {
     document.getElementById("drivername").innerHTML = snapshot.val().name;
     document.getElementById("driverinfo").innerHTML = "Driver<br>" + snapshot.val().phone + "<br>" + snapshot.val().email + "<br>" + snapshot.val().address;
+    driverAddress = snapshot.val().address;
   }
 });
-var carpoolers = [];
+
 // var carpoolernames = [];
 // var carpoolerdescriptions = [];
 await get(child(ref(db), 'events/' + sessionStorage.getItem("currentEvent"))).then((snapshot) => {
@@ -49,20 +63,31 @@ else {
     const span = document.createElement("span");
     await getDownloadURL(sref(storage, 'users/' + carpoolers[i]))
     .then((url) => {
-      const img = document.createElement('img');
-      img.classList.add("header-img");
-      img.src = url;
-      span.appendChild(img);
+      if (url) {
+        const img = document.createElement('img');
+        img.classList.add("header-img");
+        img.src = url;
+        span.appendChild(img);
+      }
     });
     await get(child(ref(db), 'users/' + carpoolers[i])).then((snapshot) => {
       if (snapshot.exists()) {
-        snapshot.val().name
-        
-        carpoolerdescriptions.push(snapshot.val().description);
+        const name = document.createElement("h2");
+        name.innerHTML = snapshot.val().name;
+        span.appendChild(name);
+        const description = document.createElement("h1");
+        description.innerHTML = "Carpooler<br>" + snapshot.val().phone + "<br>" + snapshot.val().email + "<br>" + snapshot.val().address;
+        span.appendChild(description);
+        carpoolAddresses.push(snapshot.val().address);
       }
     });
+    document.getElementById("carpoolers").appendChild(span);
   }
 }
+
+document.getElementById("eventBox").addEventListener("click", function() {
+    window.location.href = "../eventSelection.html";
+  });
 
 function initMap() {
   const directionsService = new google.maps.DirectionsService();
