@@ -80,14 +80,14 @@ document.getElementById("profileForm").addEventListener("submit", async function
   // 'file' comes from the Blob or File API
   await uploadBytes(storageRef, file);
   //uploadBytes(storageRef, imageUploadInput.files[0]);
-  await get(child(ref(db), 'users/' + id)).then(async (snapshot) => {
+  await get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then(async (snapshot) => {
     // Get the current array data from the snapshot
-    var currentArray = snapshot.val().carpoolers || [];
+    var currentArray = snapshot.val().clubs || [];
     // Iterate through the array items
-    currentArray.push(sessionStorage.getItem("currentUser"));
+    currentArray.push(i);
 
     // Set the modified array back to the database
-    await update(ref(db, "events/" + id + "/"), {
+    await update(ref(db, "users/" + sessionStorage.getItem("currentUser")), {
       carpoolers: currentArray
     });
   });
