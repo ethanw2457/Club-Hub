@@ -722,7 +722,7 @@ strong.api:hover {
 }
 img.profile {
   width: 100%;
-  max-width: 25vw;
+  max-width: 15vw;
 }
 img.profile:hover {
   mix-blend-mode: normal;
