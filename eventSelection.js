@@ -44,6 +44,14 @@ const container = document.getElementById('container');
 
 var snapshot = await get(child(ref(db), 'events/'));
 console.log(snapshot.val());
+const snapshotArray = [];
+snapshot.forEach(childSnapshot => {
+  snapshotArray.push(childSnapshot);
+});
+
+console.log(snapshotArray);
+// Iterate over the array using for...of loop
+
 snapshot.forEach(async (childSnapshot) => {
   console.log(childSnapshot);
   const eventId = childSnapshot.key;
