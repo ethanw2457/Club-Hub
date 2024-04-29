@@ -72,10 +72,10 @@ else {
     });
     await get(child(ref(db), 'users/' + carpoolers[i])).then((snapshot) => {
       if (snapshot.exists()) {
-        const name = document.createElement("h2");
+        const name = document.createElement("h1");
         name.innerHTML = snapshot.val().name;
         span.appendChild(name);
-        const description = document.createElement("h1");
+        const description = document.createElement("h2");
         description.innerHTML = "Carpooler<br>" + snapshot.val().phone + "<br>" + snapshot.val().email + "<br>" + snapshot.val().address;
         span.appendChild(description);
         carpoolAddresses.push(snapshot.val().address);
