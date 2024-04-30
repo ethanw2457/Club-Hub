@@ -1,8 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getDatabase, ref, set, child, get, remove, update } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-import { getStorage, ref as sref, uploadBytes } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
-import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import {getStorage, ref as sref, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
+import {getStorage, ref as sref, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
