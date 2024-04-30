@@ -633,11 +633,11 @@ body {
   }
 }
 
-.bike-details {
+.snack-details {
   display: none;
 }
 
-.bike-details.show {
+.snack-details.show {
   display: block;
 }
 
@@ -649,7 +649,7 @@ body {
   background-color: #dfe6f1;
 }
 
-.bike-details-toggle {
+.snack-details-toggle {
   display: inline-block;
   padding: 5px 10px;
   background-color: #00b8d4;
@@ -659,11 +659,11 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.bike-details-toggle:hover {
+.snack-details-toggle:hover {
   background-color: #004d40 ;
 }
 
-.bike-details {
+.snack-details {
   margin-top: 10px;
   padding: 10px;
   background-color: #f5f5f5;

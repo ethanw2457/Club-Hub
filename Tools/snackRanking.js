@@ -79,7 +79,22 @@ async function save(name, address, description, type, price) {
     }
   }
 }
+const postsRef = ref(db, 'user-posts');
+const sortedPostsQuery = query(postsRef, orderByChild('starCount'));
 
+// Fetch the sorted posts once
+get(sortedPostsQuery).then((snapshot) => {
+  if (snapshot.exists()) {
+    // Iterate through each child node
+    snapshot.forEach((childSnapshot) => {
+      // Access the child data
+      const post = childSnapshot.val();
+      console.log(post);
+    });
+  } else {
+    console.log("No posts found");
+  }
+})
 // Handle bike details toggle
 const bikeDetailsToggle = document.querySelectorAll('.bike-details-toggle');
 bikeDetailsToggle.forEach(function(element) {
