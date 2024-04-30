@@ -79,10 +79,10 @@ async function save(name, address, description, type, price) {
     }
   }
 }
-const postsRef = ref(db, 'snacks');
-const sortedPostsQuery = await query(postsRef, orderByValue('score'));
+const postsRef = ref(db, '/snacks/');
+const sortedPostsQuery = await query(child(ref(db), 'snacks/'), orderByChild('score'));
 
-get(sortedPostsQuery).then((snapshot) => {
+await get(sortedPostsQuery).then((snapshot) => {
   if (snapshot.exists()) {
     // Iterate through each child node
     snapshot.forEach((childSnapshot) => {
