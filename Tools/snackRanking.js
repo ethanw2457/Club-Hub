@@ -98,7 +98,8 @@ await get(sortedPostsQuery).then((snapshot) => {
       cardWrapper.appendChild(snackCard);
       container.appendChild(cardWrapper);
       const snackName = document.createElement('h5');
-      snackName.class
+      snackName.classList.add("card-title");
+      snackName.textContent = snack.name;
     });
   }
 });
