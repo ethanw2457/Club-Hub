@@ -110,7 +110,17 @@ const h = document.querySelectorAll('.upvote');
 h.forEach(function(element) {
   element.addEventListener('click', function(e) {
     e.preventDefault();
-    e.target.classList.toggle('onoff');
+    console.log(e.target.classList.contains('on'));
+    
+    if (this.classList.contains('on')) {
+      this.innerHTML = parseInt(this.innerHTML) - 1;
+      this.childNodes[0].classList.remove("fas");
+    }
+    else {
+      this.innerHTML = parseInt(this.innerHTML) + 1;
+      this.childNodes[0].classList.add("fas");
+    }
+    e.target.classList.toggle('on');
   });
 });
 
