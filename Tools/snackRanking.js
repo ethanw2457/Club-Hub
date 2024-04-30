@@ -59,25 +59,25 @@ rentalForm.addEventListener('submit', function(e) {
 
 //save to database
 
-function save(name, address, description, bike, price) {
+async function save(name, address, description, type, price) {
   let i = 1;
   let done = false;
   while (!done) {
-    snapshot = await get(child(ref(db), 'users/' + i));
+    const snapshot = await get(child(ref(db), 'snacks/' + i));
     if (snapshot.exists()) {
       i++;
     } else {
-      set(ref(db, 'snacks/' + name), {
+      await set(ref(db, 'snacks/' + i), {
         name: name,
         address: address,
         description: description,
-        bike: bike,
-        price: price
+        type: type,
+        price: price,
+        score: 0
       });
+      done = true;
     }
   }
-
-  alert('Saved')
 }
 
 // Handle bike details toggle
