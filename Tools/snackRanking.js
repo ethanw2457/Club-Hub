@@ -106,7 +106,7 @@ showDetails.forEach(function(element) {
   });
 });
 
-const h = document.querySelectorAll('.show-details');
+const h = document.querySelectorAll('.upvote');
 h.forEach(function(element) {
   element.addEventListener('click', function(e) {
     e.preventDefault();
