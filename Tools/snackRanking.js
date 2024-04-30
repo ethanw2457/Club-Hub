@@ -110,7 +110,6 @@ const h = document.querySelectorAll('.upvote');
 h.forEach(function(element) {
   element.addEventListener('click', function(e) {
     e.preventDefault();
-    console.log(e.target.classList.contains('on'));
     const icon = this.querySelector('i'); // Get the <i> element within the clicked element
     const textNode = this.childNodes[1]; // Get the text node within the button element
     if (this.classList.contains('on')) {
