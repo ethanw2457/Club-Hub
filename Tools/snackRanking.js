@@ -99,7 +99,22 @@ await get(sortedPostsQuery).then((snapshot) => {
       container.appendChild(cardWrapper);
       const snackName = document.createElement('h5');
       snackName.classList.add("card-title");
-      snackName.textContent = snack.name;
+      snackName.innerHTML = snack.name;
+      snackCard.appendChild(snackName);
+      const snackType = document.createElement('p');
+      snackType.classList.add("card-text");
+      snackType.innerHTML = "Type: " + snack.type;
+      snackCard.appendChild(snackType);
+      const buttons = document.createElement("span");
+      const details = document.createElement("button");
+      details.classList.add("show-details");
+      details.setAttribute("snack", snackId);
+      details.innerHTML = "<i class='fas fa-info-circle me-2'></i>Details";
+      buttons.appendChild(details);
+      const upvote = document.createElement("button");
+      upvote.classList.add("upvote");
+      upvote.setAttribute("snack", snackId);
+      upvote.innerHTML = "<i class='far fa-thumbs-up me-2'></i>Upvote";
     });
   }
 });
