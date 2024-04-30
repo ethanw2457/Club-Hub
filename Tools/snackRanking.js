@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import { getDatabase, ref, set, child, get, remove, update, query, orderByChild, orderByKey, orderbyValue} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+import { getDatabase, ref, set, child, get, remove, update, query, orderByChild, orderByKey, orderByValue} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 import {getStorage, ref as sref, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -79,7 +79,7 @@ async function save(name, address, description, type, price) {
     }
   }
 }
-const postsRef = ref(db, 'snacks/');
+const postsRef = ref(db, 'snacks');
 const sortedPostsQuery = await query(postsRef, orderByValue('score'));
 
 get(sortedPostsQuery).then((snapshot) => {
