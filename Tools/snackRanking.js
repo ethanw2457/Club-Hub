@@ -47,7 +47,7 @@ rentalForm.addEventListener('submit', function(e) {
   // Get form values
   const name = document.getElementById('name').value.trim();
   const address = document.getElementById('address').value.trim();
-  const description = document.getElementById('description').value.trim();
+  const description = document.getElementById('description').value.trim().replace(/\n/g, "<br>");
   const snackType = document.getElementById('snackType').value;
   const price = document.getElementById('price').value;
   save(name, address, description, snackType, price);
@@ -110,6 +110,13 @@ await get(sortedPostsQuery).then(async (snapshot) => {
       details.classList.add("show-details");
       details.setAttribute("snack", snackId);
       details.innerHTML = "<i class='fas fa-info-circle me-2'></i>Details";
+      details.addEventListener('click', function(e) {
+        e.preventDefault();
+        const snackId = this.getAttribute('snack');
+        console.log("snack");
+        const snackDetails = document.getElementById(snackId + 'details');
+        snackDetails.classList.toggle('show');
+      });
       buttons.appendChild(details);
       const upvote = document.createElement("button");
       upvote.classList.add("upvote");
@@ -129,7 +136,9 @@ await get(sortedPostsQuery).then(async (snapshot) => {
       snackCard.appendChild(buttons);
       const snackDescription = document.createElement('p');
       snackDescription.classList.add("snack-details");
-      snackDescription.id = snackId + "deatils";
+      snackDescription.id = snackId + "details";
+      snackDescription.innerHTML = "Price Range: " + snack.price + "<br>Vendor Address: " + snack.address + "<br>Description: " + snack.description;
+      snackCard.appendChild(snackDescription);
     });
   }
 });
@@ -139,6 +148,7 @@ showDetails.forEach(function(element) {
   element.addEventListener('click', function(e) {
     e.preventDefault();
     const snackId = this.getAttribute('snack');
+    console.log("snack");
     const snackDetails = document.getElementById(snackId + 'details');
     snackDetails.classList.toggle('show');
   });
