@@ -79,19 +79,16 @@ async function save(name, address, description, type, price) {
     }
   }
 }
-const postsRef = ref(db, '/snacks/');
-const sortedPostsQuery = await query(child(ref(db), 'snacks/'), orderByChild('score'));
+const postsRef = ref(db, 'snacks');
+const sortedPostsQuery = await query(postsRef, orderByChild('score'));
 
 await get(sortedPostsQuery).then((snapshot) => {
   if (snapshot.exists()) {
     // Iterate through each child node
     snapshot.forEach((childSnapshot) => {
       // Access the child data
-      const post = childSnapshot.val();
-      console.log(post);
+      const post = childSnapshot.val().name;
     });
-  } else {
-    console.log("No posts found");
   }
 })
 // Handle bike details toggle
@@ -105,18 +102,31 @@ showDetails.forEach(function(element) {
   });
 });
 
-const h = document.querySelectorAll('.upvote');
-h.forEach(function(element) {
-  element.addEventListener('click', function(e) {
+const upvoteButtons = document.querySelectorAll('.upvote');
+upvoteButtons.forEach(function(element) {
+  element.addEventListener('click', async function(e) {
     e.preventDefault();
     const icon = this.querySelector('i');
     const textNode = this.childNodes[1];
+    var score;
+    await get(ref(db, "snacks/" + this.getAttribute('snack'))).then(async (snapshot) => {
+      score = parseInt(snapshot.val().score);
+    });
     if (this.classList.contains('on')) {
-      textNode.nodeValue = parseInt(textNode.nodeValue) - 1;
+      textNode.nodeValue = score - 1;
+      await update(ref(db, "snacks/" + this.getAttribute('snack')), {
+        score: score - 1
+      });
+      await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "snacks/" + this.getAttribute('snack')), {
+        voted: score - 1
+      });
       icon.classList.remove("fas");
     }
     else {
-      textNode.nodeValue = parseInt(textNode.nodeValue) + 1;
+      textNode.nodeValue = score + 1;
+      await update(ref(db, "snacks/" + this.getAttribute('snack')), {
+        score: score + 1
+      });
       icon.classList.add("fas");
     }
     this.classList.toggle('on');
