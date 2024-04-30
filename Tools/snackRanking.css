@@ -649,7 +649,7 @@ body {
   background-color: #dfe6f1;
 }
 
-.snack-details-toggle {
+.show-details {
   display: inline-block;
   padding: 5px 10px;
   background-color: #00b8d4;
@@ -659,7 +659,7 @@ body {
   transition: background-color 0.3s ease;
 }
 
-.snack-details-toggle:hover {
+.show-details:hover {
   background-color: #004d40 ;
 }
 
@@ -748,19 +748,8 @@ h1::after {
   padding: 5px 10px;
 }
 
-.btn-primary {
-  background-color: #00b8d4;
-  border-color: #00b8d4;
-  transition: background-color 0.3s ease;
-}
 
-.btn-primary:hover {
-  background-color: #004d40 ;
-}
 
-.btn-primary i {
-  animation: rotate 2s linear infinite;
-}
 
 @keyframes rotate {
   from {

@@ -248,7 +248,7 @@ main {
   position: relative;
   display: flex;
  /* very important */
-  width: 100%;
+  width: 300%;
   max-width: 100rem;
   right: 25%;
   margin: 0 auto;
