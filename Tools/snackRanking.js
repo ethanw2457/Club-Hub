@@ -106,13 +106,11 @@ showDetails.forEach(function(element) {
   });
 });
 
-const showDetails = document.querySelectorAll('.show-details');
-showDetails.forEach(function(element) {
+const h = document.querySelectorAll('.show-details');
+h.forEach(function(element) {
   element.addEventListener('click', function(e) {
     e.preventDefault();
-    const snackId = this.getAttribute('snack');
-    const snackDetails = document.getElementById(snackId + 'details');
-    snackDetails.classList.toggle('show');
+    e.target.classList.toggle('onoff');
   });
 });
 
