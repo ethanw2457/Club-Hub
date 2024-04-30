@@ -132,42 +132,42 @@ await get(sortedPostsQuery).then(async (snapshot) => {
         score = parseInt(snapshot.val().score);
       });
       upvote.innerHTML = "<i class='fa" + ((voted) ? "s" : "r") + " fa-thumbs-up me-2'></i>" + score;
+      upvote.addEventListener('click', async function(e) {
+        e.preventDefault();
+        const icon = this.querySelector('i');
+        const textNode = this.childNodes[1];
+        var score;
+        await get(ref(db, "snacks/" + this.getAttribute('snack'))).then(async (snapshot) => {
+          score = parseInt(snapshot.val().score);
+        });
+        if (this.classList.contains('on')) {
+          textNode.nodeValue = score - 1;
+          await update(ref(db, "snacks/" + this.getAttribute('snack')), {
+            score: score - 1
+          });
+          await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
+            voted : false
+          });
+          icon.classList.remove("fas");
+        }
+        else {
+          textNode.nodeValue = score + 1;
+          await update(ref(db, "snacks/" + this.getAttribute('snack')), {
+            score: score + 1
+          });
+          await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
+            voted : true
+          });
+          icon.classList.add("fas");
+        }
+        this.classList.toggle('on');
+      });
       buttons.appendChild(upvote);
       snackCard.appendChild(buttons);
       const snackDescription = document.createElement('p');
       snackDescription.classList.add("snack-details");
       snackDescription.id = snackId + "details";
       snackDescription.innerHTML = "Price Range: " + snack.price + "<br>Vendor Address: " + snack.address + "<br>Description: " + snack.description;
-      snackDescription.addEventListener('click', async function(e) {
-          e.preventDefault();
-          const icon = this.querySelector('i');
-          const textNode = this.childNodes[1];
-          var score;
-          await get(ref(db, "snacks/" + this.getAttribute('snack'))).then(async (snapshot) => {
-            score = parseInt(snapshot.val().score);
-          });
-          if (this.classList.contains('on')) {
-            textNode.nodeValue = score - 1;
-            await update(ref(db, "snacks/" + this.getAttribute('snack')), {
-              score: score - 1
-            });
-            await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
-              voted : false
-            });
-            icon.classList.remove("fas");
-          }
-          else {
-            textNode.nodeValue = score + 1;
-            await update(ref(db, "snacks/" + this.getAttribute('snack')), {
-              score: score + 1
-            });
-            await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
-              voted : true
-            });
-            icon.classList.add("fas");
-          }
-          this.classList.toggle('on');
-        });
       snackCard.appendChild(snackDescription);
     });
   }
