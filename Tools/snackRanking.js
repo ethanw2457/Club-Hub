@@ -117,8 +117,8 @@ upvoteButtons.forEach(function(element) {
       await update(ref(db, "snacks/" + this.getAttribute('snack')), {
         score: score - 1
       });
-      await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "snacks/" + this.getAttribute('snack')), {
-        voted: score - 1
+      await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "snacks/"), {
+        score : score - 1
       });
       icon.classList.remove("fas");
     }
