@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import { getDatabase, ref, set, child, get, remove, update, query, orderByChild} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+import { getDatabase, ref, set, child, get, remove, update, query, orderByChild, orderByKey, orderbyValue} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 import {getStorage, ref as sref, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -79,10 +79,9 @@ async function save(name, address, description, type, price) {
     }
   }
 }
-const postsRef = ref(db, 'user-posts');
-const sortedPostsQuery = query(postsRef, orderByChild('starCount'));
+const postsRef = ref(db, 'snacks/');
+const sortedPostsQuery = await query(postsRef, orderByValue('score'));
 
-// Fetch the sorted posts once
 get(sortedPostsQuery).then((snapshot) => {
   if (snapshot.exists()) {
     // Iterate through each child node
@@ -110,14 +109,14 @@ const h = document.querySelectorAll('.upvote');
 h.forEach(function(element) {
   element.addEventListener('click', function(e) {
     e.preventDefault();
-    const icon = this.querySelector('i'); // Get the <i> element within the clicked element
-    const textNode = this.childNodes[1]; // Get the text node within the button element
+    const icon = this.querySelector('i');
+    const textNode = this.childNodes[1];
     if (this.classList.contains('on')) {
-      textNode.nodeValue = parseInt(textNode.nodeValue) - 1; // Modify the text content using the text node
+      textNode.nodeValue = parseInt(textNode.nodeValue) - 1;
       icon.classList.remove("fas");
     }
     else {
-      textNode.nodeValue = parseInt(textNode.nodeValue) + 1; // Modify the text content using the text node
+      textNode.nodeValue = parseInt(textNode.nodeValue) + 1;
       icon.classList.add("fas");
     }
     this.classList.toggle('on');
