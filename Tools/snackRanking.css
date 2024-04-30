@@ -642,7 +642,7 @@ body {
 }
 
 .upvote {
-  background-color: #4CAF50;
+  background-color: #ffffff;
 }
 
 .upvote.onoff {
@@ -652,7 +652,7 @@ body {
 .upvote {
   display: inline-block;
   padding: 5px 5px;
-  color: #fff;
+  color: #000000;
   border: none;
   border-radius: 5px;
   transition: background-color 0.15s ease;
