@@ -641,6 +641,28 @@ body {
   display: block;
 }
 
+.upvote {
+  display: none;
+}
+
+.upvote.onoff {
+  display: block;
+}
+
+.upvote {
+  display: inline-block;
+  padding: 5px 5px;
+  background-color: #0047d6;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  transition: background-color 0.15s ease;
+}
+
+.upvote:hover {
+  background-color: #004d40 ;
+}
+
 
 .snack-card {
   padding: 20px;
