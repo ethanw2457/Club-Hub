@@ -264,7 +264,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   width: var(--image-info-width);
-  max-width: 25rem;
+  max-width: 300rem;
   padding: 2rem 1rem;
   row-gap: 0.5rem;
   translate: 0 0;
@@ -272,11 +272,10 @@ main {
 }
 
 .image-and-info img {
-  width: 80%;
+  width: 100%;
   grid-column: 1/ 4; /* star of the show */
   padding-bottom: 0.5rem;
   justify-self: center;
-
   padding: 0 1rem;
 }
 

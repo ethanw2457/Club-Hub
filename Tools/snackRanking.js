@@ -79,6 +79,8 @@ async function save(name, address, description, type, price) {
     }
   }
 }
+const container = document.getElementById('container');
+
 const postsRef = ref(db, 'snacks');
 const sortedPostsQuery = await query(postsRef, orderByChild('score'));
 
@@ -86,11 +88,20 @@ await get(sortedPostsQuery).then((snapshot) => {
   if (snapshot.exists()) {
     // Iterate through each child node
     snapshot.forEach((childSnapshot) => {
-      // Access the child data
-      const post = childSnapshot.val().name;
+      const snackId = childSnapshot.key;
+      const snack = childSnapshot.val();
+      const cardWrapper = document.createElement('div');
+      //change md-# to specify num columns
+      cardWrapper.classList.add('col-md-6');
+      const snackCard = document.createElement('div');
+      snackCard.classList.add('snack-card');
+      cardWrapper.appendChild(snackCard);
+      container.appendChild(cardWrapper);
+      const snackName = document.createElement('h5');
+      snackName.class
     });
   }
-})
+});
 // Handle bike details toggle
 const showDetails = document.querySelectorAll('.show-details');
 showDetails.forEach(function(element) {
@@ -117,8 +128,8 @@ upvoteButtons.forEach(function(element) {
       await update(ref(db, "snacks/" + this.getAttribute('snack')), {
         score: score - 1
       });
-      await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "snacks"), {
-        this.getAttribute('snack') : false
+      await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
+        voted : false
       });
       icon.classList.remove("fas");
     }
@@ -127,8 +138,8 @@ upvoteButtons.forEach(function(element) {
       await update(ref(db, "snacks/" + this.getAttribute('snack')), {
         score: score + 1
       });
-      await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "snacks"), {
-        this.getAttribute('snack') : true
+      await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
+        voted : true
       });
       icon.classList.add("fas");
     }
