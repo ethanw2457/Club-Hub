@@ -125,6 +125,11 @@ await get(sortedPostsQuery).then(async (snapshot) => {
         score = parseInt(snapshot.val().score);
       });
       upvote.innerHTML = "<i class='fa" + ((voted) ? "s" : "r") + " fa-thumbs-up me-2'></i>" + score;
+      buttons.appendChild(upvote);
+      snackCard.appendChild(buttons);
+      const snackDescription = document.createElement('p');
+      snackDescription.classList.add("snack-details");
+      snackDescription.id = snackId + "deatils";
     });
   }
 });
