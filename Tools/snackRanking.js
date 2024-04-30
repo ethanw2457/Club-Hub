@@ -99,7 +99,6 @@ await get(sortedPostsQuery).then(async (snapshot) => {
       snackCard.classList.add('card-body');
       snackBody.appendChild(snackCard);
       cardWrapper.appendChild(snackBody);
-      container.appendChild(cardWrapper);
       const snackName = document.createElement('h5');
       snackName.classList.add("card-title");
       snackName.innerHTML = snack.name;
@@ -116,7 +115,6 @@ await get(sortedPostsQuery).then(async (snapshot) => {
       details.addEventListener('click', function(e) {
         e.preventDefault();
         const snackId = this.getAttribute('snack');
-        console.log("snack");
         const snackDetails = document.getElementById(snackId + 'details');
         snackDetails.classList.toggle('show');
       });
@@ -175,6 +173,7 @@ await get(sortedPostsQuery).then(async (snapshot) => {
       snackDescription.id = snackId + "details";
       snackDescription.innerHTML = "Price Range: " + snack.price + "<br>Vendor Address: " + snack.address + "<br>Description: " + snack.description;
       snackCard.appendChild(snackDescription);
+      container.appendChild()
     });
   }
 });

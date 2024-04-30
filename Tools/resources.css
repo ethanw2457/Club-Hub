@@ -119,3 +119,20 @@ ul li:nth-child(5):hover span
 {
   background: #25D366;
 }
+
+ul li:nth-child(11):hover span
+{
+  background: #e4405f;
+}
+ul li:nth-child(13):hover span
+{
+  background: #FA8128;
+}
+ul li:nth-child(17):hover span
+{
+  background: #e4405f;
+}
+ul li:nth-child(15):hover span
+{
+  background: #50c7c7;
+}
