@@ -1,5 +1,5 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import { getDatabase, ref, set, child, get, remove, update } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+import { getDatabase, ref, set, child, get, remove, update, query, orderByChild} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
 import {getStorage, ref as sref, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -31,19 +31,8 @@ getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
   img.setAttribute('src', url);
 });
 // End of Header Package================================================================================================
-const firebaseConfig = {
-  apiKey: "AIzaSyDjMBUC1EhrOSzzgId-sglmdmJJ4kCyV5Q",
-  authDomain: "club-central-2af6e.firebaseapp.com",
-  databaseURL: "https://club-central-2af6e-default-rtdb.firebaseio.com",
-  projectId: "club-central-2af6e",
-  storageBucket: "club-central-2af6e.appspot.com",
-  messagingSenderId: "578174084496",
-  appId: "1:578174084496:web:13f92682f267332f62ff15",
-  measurementId: "G-FKR7SRZ915"
-};
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
 
 // Initialize Realtime Database and get a reference to the service
 const db = getDatabase(app);
@@ -56,13 +45,12 @@ rentalForm.addEventListener('submit', function(e) {
   e.preventDefault();
 
   // Get form values
-  const name = document.getElementById('name').value;
-  const address = document.getElementById('address').value;
-  const description = document.getElementById('description').value;
-  const bike = document.getElementById('bike').value;
+  const name = document.getElementById('name').value.trim();
+  const address = document.getElementById('address').value.trim();
+  const description = document.getElementById('description').value.trim();
+  const snackType = document.getElementById('snackType').value;
   const price = document.getElementById('price').value;
-  console.log(name, address, description, bike, price);
-  save(name, address, description, bike, price);
+  save(name, address, description, snackType, price);
 
   // Display submission result
   submissionResult.classList.add('show');
@@ -72,13 +60,22 @@ rentalForm.addEventListener('submit', function(e) {
 //save to database
 
 function save(name, address, description, bike, price) {
-  set(ref(db, 'snacks/' + name), {
-    name: name,
-    address: address,
-    description: description,
-    bike: bike,
-    price: price,
-  });
+  let i = 1;
+  let done = false;
+  while (!done) {
+    snapshot = await get(child(ref(db), 'users/' + i));
+    if (snapshot.exists()) {
+      i++;
+    } else {
+      set(ref(db, 'snacks/' + name), {
+        name: name,
+        address: address,
+        description: description,
+        bike: bike,
+        price: price
+      });
+    }
+  }
 
   alert('Saved')
 }
@@ -88,7 +85,7 @@ const bikeDetailsToggle = document.querySelectorAll('.bike-details-toggle');
 bikeDetailsToggle.forEach(function(element) {
   element.addEventListener('click', function(e) {
     e.preventDefault();
-    const bikeId = this.getAttribute('data-bike');
+    const bikeId = this.getAttribute('data');
     const bikeDetails = document.getElementById(bikeId + '-details');
     bikeDetails.classList.toggle('show');
   });
