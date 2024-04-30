@@ -138,12 +138,42 @@ await get(sortedPostsQuery).then(async (snapshot) => {
       snackDescription.classList.add("snack-details");
       snackDescription.id = snackId + "details";
       snackDescription.innerHTML = "Price Range: " + snack.price + "<br>Vendor Address: " + snack.address + "<br>Description: " + snack.description;
+      snackDescription.addEventListener('click', async function(e) {
+          e.preventDefault();
+          const icon = this.querySelector('i');
+          const textNode = this.childNodes[1];
+          var score;
+          await get(ref(db, "snacks/" + this.getAttribute('snack'))).then(async (snapshot) => {
+            score = parseInt(snapshot.val().score);
+          });
+          if (this.classList.contains('on')) {
+            textNode.nodeValue = score - 1;
+            await update(ref(db, "snacks/" + this.getAttribute('snack')), {
+              score: score - 1
+            });
+            await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
+              voted : false
+            });
+            icon.classList.remove("fas");
+          }
+          else {
+            textNode.nodeValue = score + 1;
+            await update(ref(db, "snacks/" + this.getAttribute('snack')), {
+              score: score + 1
+            });
+            await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
+              voted : true
+            });
+            icon.classList.add("fas");
+          }
+          this.classList.toggle('on');
+        });
       snackCard.appendChild(snackDescription);
     });
   }
 });
 // Handle bike details toggle
-const showDetails = document.querySelectorAll('.show-details');
+/*const showDetails = document.querySelectorAll('.show-details');
 showDetails.forEach(function(element) {
   element.addEventListener('click', function(e) {
     e.preventDefault();
@@ -186,4 +216,4 @@ upvoteButtons.forEach(function(element) {
     }
     this.classList.toggle('on');
   });
-});
+});*/

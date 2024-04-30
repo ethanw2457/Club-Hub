@@ -301,7 +301,7 @@ main {
   justify-self: end;
   align-self: center;
   width: 2rem;
-  height: 2rem; /* Set the height */
+  height: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
