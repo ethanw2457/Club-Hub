@@ -114,7 +114,17 @@ await get(sortedPostsQuery).then(async (snapshot) => {
       const upvote = document.createElement("button");
       upvote.classList.add("upvote");
       upvote.setAttribute("snack", snackId);
-      upvote.innerHTML = "<i class='far fa-thumbs-up me-2'></i>Upvote";
+      var voted = false;
+      var score;
+      await get(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + snackId)).then((snapshot) => {
+        if (snapshot.exists()) {
+          voted = snapshot.val().voted;
+        }
+      });
+      await get(ref(db, "snacks/" + snackId)).then((snapshot) => {
+        score = parseInt(snapshot.val().score);
+      });
+      upvote.innerHTML = "<i class='fa" + ((voted) ? "s" : "r") + " fa-thumbs-up me-2'></i>" + score;
     });
   }
 });
