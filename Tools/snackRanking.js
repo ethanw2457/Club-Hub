@@ -92,7 +92,7 @@ await get(sortedPostsQuery).then(async (snapshot) => {
       const snack = childSnapshot.val();
       const cardWrapper = document.createElement('div');
       //change md-# to specify num columns
-      cardWrapper.classList.add('col-md-6');
+      cardWrapper.classList.add('col-md-4');
       const snackCard = document.createElement('div');
       snackCard.classList.add('snack-card');
       cardWrapper.appendChild(snackCard);
@@ -131,7 +131,10 @@ await get(sortedPostsQuery).then(async (snapshot) => {
       await get(ref(db, "snacks/" + snackId)).then((snapshot) => {
         score = parseInt(snapshot.val().score);
       });
-      upvote.innerHTML = "<i class='fa" + ((voted) ? "s" : "r") + " fa-thumbs-up me-2'></i>" + score;
+      upvote.innerHTML = "<i class='far " + ((voted) ? "fas" : "") + " fa-thumbs-up me-2'></i>" + score;
+      if (voted) {
+        upvote.classList.toggle('on');
+      }
       upvote.addEventListener('click', async function(e) {
         e.preventDefault();
         const icon = this.querySelector('i');
