@@ -84,10 +84,10 @@ const container = document.getElementById('container');
 const postsRef = ref(db, 'snacks');
 const sortedPostsQuery = await query(postsRef, orderByChild('score'));
 
-await get(sortedPostsQuery).then((snapshot) => {
+await get(sortedPostsQuery).then(async (snapshot) => {
   if (snapshot.exists()) {
     // Iterate through each child node
-    snapshot.forEach((childSnapshot) => {
+    snapshot.forEach(async (childSnapshot) => {
       const snackId = childSnapshot.key;
       const snack = childSnapshot.val();
       const cardWrapper = document.createElement('div');

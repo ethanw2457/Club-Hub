@@ -24,18 +24,6 @@
   --direction-buttons-width: 6rem;
 }
 
-.hover-zoom {
-    display: inline-block;
-    overflow: hidden;
-    position: relative;
-    transition: transform 0.3s ease;
-}
-
-.hover-zoom:hover {
-    transform: scale(1.1); /* Adjust the scale factor as needed */
-}
-
-
 html {
   /* Next And Prev Button Background colors Variables */
   --nextBackgroundColor: var(--spirulina);
