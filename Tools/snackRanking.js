@@ -93,9 +93,12 @@ await get(sortedPostsQuery).then(async (snapshot) => {
       const cardWrapper = document.createElement('div');
       //change md-# to specify num columns
       cardWrapper.classList.add('col-md-4');
+      const snackBody = document.createElement('div');
+      snackBody.classList.add('snack-card');
       const snackCard = document.createElement('div');
-      snackCard.classList.add('snack-card');
-      cardWrapper.appendChild(snackCard);
+      snackCard.classList.add('card-body');
+      snackBody.appendChild(snackCard);
+      cardWrapper.appendChild(snackBody);
       container.appendChild(cardWrapper);
       const snackName = document.createElement('h5');
       snackName.classList.add("card-title");
