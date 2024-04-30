@@ -642,17 +642,16 @@ body {
 }
 
 .upvote {
-  display: none;
+  background-color: #4CAF50;
 }
 
 .upvote.onoff {
-  display: block;
+  background-color: #0047d6;
 }
 
 .upvote {
   display: inline-block;
   padding: 5px 5px;
-  background-color: #0047d6;
   color: #fff;
   border: none;
   border-radius: 5px;
