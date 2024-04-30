@@ -111,16 +111,16 @@ h.forEach(function(element) {
   element.addEventListener('click', function(e) {
     e.preventDefault();
     console.log(e.target.classList.contains('on'));
-    
+    const icon = this.querySelector('i'); // Get the <i> element within the clicked element
+    const textNode = this.childNodes[1]; // Get the text node within the button element
     if (this.classList.contains('on')) {
-      this.innerHTML = parseInt(this.innerHTML) - 1;
-      this.childNodes[0].classList.remove("fas");
+      textNode.nodeValue = parseInt(textNode.nodeValue) - 1; // Modify the text content using the text node
+      icon.classList.remove("fas");
     }
     else {
-      this.innerHTML = parseInt(this.innerHTML) + 1;
-      this.childNodes[0].classList.add("fas");
+      textNode.nodeValue = parseInt(textNode.nodeValue) + 1; // Modify the text content using the text node
+      icon.classList.add("fas");
     }
-    e.target.classList.toggle('on');
+    this.classList.toggle('on');
   });
 });
-
