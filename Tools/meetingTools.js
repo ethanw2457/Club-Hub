@@ -1,4 +1,4 @@
-
+// == Final ==
 // get CSS Variables
 const styles = getComputedStyle(document.documentElement);
 

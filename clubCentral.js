@@ -1,5 +1,6 @@
 import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import {getDatabase, ref, set, child, get, remove} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+// == Final ==
 //sessionStorage.setItem("currentUser","1");
 const firebaseConfig = {
   databaseURL: "https://club-central-2af6e-default-rtdb.firebaseio.com"
