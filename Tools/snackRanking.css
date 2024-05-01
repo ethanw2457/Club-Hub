@@ -606,8 +606,36 @@ a.homer {
 }
 
 /* ==============================================End of Header Package==============================================*/
+
+/* 
+#006064 darker teal 
+#00acc1 shadow teal 
+#00b8d4 light teal 
+#fff59d nice main yellow
+*/
+
+#snack-heading {
+  color: #fff59d; /* Change color as desired */
+}
+
+
+.tinted-gif {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  filter: brightness(20%); 
+}
+
+.content {
+  padding: 20px;
+}
+
 body {
-  background-image: url('https://cdn.dribbble.com/users/1162077/screenshots/4667608/food-pattern.gif');
+  /* background-image: url('https://cdn.dribbble.com/users/1162077/screenshots/4667608/food-pattern.gif');
+  filter: brightness(20%); */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -717,7 +745,7 @@ h1::after {
   display: block;
   height: 3px;
   width: 50px;
-  background-color: #00b8d4;
+  background-color: #fff59d;
   margin: 10px 0;
 }
 
