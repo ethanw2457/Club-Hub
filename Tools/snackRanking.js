@@ -1,6 +1,6 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import { getDatabase, ref, set, child, get, remove, update, query, orderByChild, orderByKey, orderByValue} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
-import {getStorage, ref as sref, getDownloadURL, uploadBytes} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
+import {initializeApp} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
+import {getDatabase, ref, set, child, get, remove, update, query, orderByChild} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-database.js";
+import {getStorage, ref as sref, uploadBytes, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js"
 // == Final ==
 // Header Package=============================================================================================================
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -16,6 +16,7 @@ const firebaseConfig = {
 };
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 const storage = getStorage(app);
 
 
@@ -24,19 +25,25 @@ document.getElementById("sign-out").addEventListener('click', signOut);
 function signOut() {
   sessionStorage.setItem("currentUser", "");
 }
-getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
+await getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
 .then((url) => {
 
   // Or inserted into an <img> element
   const img = document.getElementById('profile-pic');
   img.setAttribute('src', url);
 });
+await get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then((snapshot) => {
+  if (!snapshot.val().creator)
+    document.getElementById("createClub").style.display = "none";
+
+});
 // End of Header Package================================================================================================
+
 
 // Initialize Firebase
 
 // Initialize Realtime Database and get a reference to the service
-const db = getDatabase(app);
+
 
 // Handle form submission
 const rentalForm = document.getElementById('snack-form');

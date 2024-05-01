@@ -25,14 +25,14 @@ document.getElementById("sign-out").addEventListener('click', signOut);
 function signOut() {
   sessionStorage.setItem("currentUser", "");
 }
-getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
+await getDownloadURL(sref(storage, 'users/' + sessionStorage.getItem("currentUser")))
 .then((url) => {
 
   // Or inserted into an <img> element
   const img = document.getElementById('profile-pic');
   img.setAttribute('src', url);
 });
-get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then((snapshot) => {
+await get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then((snapshot) => {
   if (!snapshot.val().creator)
     document.getElementById("createClub").style.display = "none";
 

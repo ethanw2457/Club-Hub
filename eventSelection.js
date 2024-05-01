@@ -78,7 +78,7 @@ for (const childSnapshot of snapshotArray) {
   const dateHeading = document.createElement('h3');
   const hr = document.createElement('hr');
   const clubLink = document.createElement('a');
-  clubLink.href = "../Organizations/clubProfile.html";
+  clubLink.href = "Organizations/clubProfile.html";
   clubLink.innerHTML = "Host Club";
   const descriptionParagraph = document.createElement('p');
   const buttonContainer = document.createElement('span');
@@ -90,7 +90,7 @@ for (const childSnapshot of snapshotArray) {
   secondButton.textContent = "Carpool";
   secondButton.id = "carpool" + eventId;
   const info = document.createElement('a');
-  info.href = "../Transport/driver.html";
+  info.href = "Transport/driver.html";
   const infoIcon = document.createElement('img');
   infoIcon.src = "https://static-00.iconduck.com/assets.00/info-circle-icon-512x480-r5cstdbp.png";
   infoIcon.classList.add("info");
@@ -149,7 +149,7 @@ for (const childSnapshot of snapshotArray) {
         });
       }
       sessionStorage.setItem("currentEvent", id);
-      window.location.href = '/Transport/eventReceipt.html';
+      window.location.href = 'Transport/eventReceipt.html';
     }
     else if (event.target.id.includes("carpool")) {
       if (!driverExists) {
@@ -179,7 +179,7 @@ for (const childSnapshot of snapshotArray) {
         });
       });
       sessionStorage.setItem("currentEvent", id);
-      window.location.href = '/Transport/eventReceipt.html';
+      window.location.href = 'Transport/eventReceipt.html';
     }
     
   });
