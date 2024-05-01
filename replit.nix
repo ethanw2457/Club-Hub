@@ -2,4 +2,4 @@
     deps = [
       pkgs.cowsay
     ];
-}a
+}
