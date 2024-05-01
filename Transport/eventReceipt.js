@@ -13,7 +13,7 @@ const firebaseConfig = {
   appId: "1:578174084496:web:13f92682f267332f62ff15",
   measurementId: "G-FKR7SRZ915"
 };
-sessionStorage.setItem("currentEvent","4");
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase(app);
