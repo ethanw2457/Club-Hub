@@ -94,7 +94,7 @@ else {
         return;
       }
       else if (event.target.id.includes("event")) {
-        sessionStorage.setIteam("currentEvent", id);
+        sessionStorage.setItem("currentEvent", id);
         return;
       }
     });
