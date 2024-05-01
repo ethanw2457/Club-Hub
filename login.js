@@ -107,7 +107,7 @@ document.getElementById("signupform").addEventListener("submit", async function(
   // Assume AJAX call to send login info to server and save in database
   const urlParams = new URLSearchParams(window.location.search);
   //Redirect to page that brought user to login page
-  window.location.href = urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';
+  window.location.href = urlParams.get('redirect') ? urlParams.get('redirect') : './clubCentral.html';
 });
 
 document.getElementById("signinform").addEventListener("submit", async function(event) {
@@ -133,7 +133,7 @@ document.getElementById("signinform").addEventListener("submit", async function(
   else {
     sessionStorage.setItem("currentUser", i);
     const urlParams = new URLSearchParams(window.location.search);
-    window.location.href = urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';
+    window.location.href = urlParams.get('redirect') ? urlParams.get('redirect') : './clubCentral.html';
 
     //document.getElementById("result").innerHTML = localStorage.getItem("user1");
 
