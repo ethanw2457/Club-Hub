@@ -99,7 +99,9 @@ document.getElementById("profileForm").addEventListener("submit", async function
   // Assume AJAX call to send login info to server and save in database
   //const urlParams = new URLSearchParams(window.location.search);
   //Redirect to page that brought user to login page
+
   sessionStorage.setItem("currentClub", i);
+  alert("Club created!");
   window.location.href = "./clubProfile.html";
 
   //urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';

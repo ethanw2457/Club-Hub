@@ -93,7 +93,8 @@ document.getElementById("eventform").addEventListener("submit", async function(e
   //Redirect to page that brought user to login page
   await update(ref(db, "events/" + i), {
     club: sessionStorage.getItem("currentClub")
-  })
+  });
+  alert("Event created!");
   window.location.href = "../eventSelection.html";
 
   //urlParams.get('redirect') ? urlParams.get('redirect') : '/clubCentral.html';
