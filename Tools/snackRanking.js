@@ -41,7 +41,7 @@ const db = getDatabase(app);
 const rentalForm = document.getElementById('snack-form');
 const submissionResult = document.querySelector('.submission-result');
 
-rentalForm.addEventListener('submit', function(e) {
+rentalForm.addEventListener('submit', async function(e) {
   e.preventDefault();
 
   // Get form values
@@ -50,11 +50,12 @@ rentalForm.addEventListener('submit', function(e) {
   const description = document.getElementById('description').value.trim().replace(/\n/g, "<br>");
   const snackType = document.getElementById('snackType').value;
   const price = document.getElementById('price').value;
-  save(name, address, description, snackType, price);
+  await save(name, address, description, snackType, price);
 
   // Display submission result
   submissionResult.classList.add('show');
   rentalForm.reset();
+  await refresh();
 });
 
 //save to database
@@ -79,104 +80,114 @@ async function save(name, address, description, type, price) {
     }
   }
 }
-const container = document.getElementById('container');
-
-const postsRef = ref(db, 'snacks');
-const sortedPostsQuery = await query(postsRef, orderByChild('score'));
-
-await get(sortedPostsQuery).then(async (snapshot) => {
-  if (snapshot.exists()) {
-    // Iterate through each child node
-    snapshot.forEach(async (childSnapshot) => {
-      const snackId = childSnapshot.key;
-      const snack = childSnapshot.val();
-      const cardWrapper = document.createElement('div');
-      //change md-# to specify num columns
-      cardWrapper.classList.add('col-md-4');
-      const snackBody = document.createElement('div');
-      snackBody.classList.add('snack-card');
-      const snackCard = document.createElement('div');
-      snackCard.classList.add('card-body');
-      snackBody.appendChild(snackCard);
-      cardWrapper.appendChild(snackBody);
-      const snackName = document.createElement('h5');
-      snackName.classList.add("card-title");
-      snackName.innerHTML = snack.name;
-      snackCard.appendChild(snackName);
-      const snackType = document.createElement('p');
-      snackType.classList.add("card-text");
-      snackType.innerHTML = "Type: " + snack.type;
-      snackCard.appendChild(snackType);
-      const buttons = document.createElement("span");
-      const details = document.createElement("button");
-      details.classList.add("show-details");
-      details.setAttribute("snack", snackId);
-      details.innerHTML = "<i class='fas fa-info-circle me-2'></i>Details";
-      details.addEventListener('click', function(e) {
-        e.preventDefault();
-        const snackId = this.getAttribute('snack');
-        const snackDetails = document.getElementById(snackId + 'details');
-        snackDetails.classList.toggle('show');
+async function refresh() {
+  const container = document.getElementById('container');
+  container.innerHTML = "";
+  const postsRef = ref(db, 'snacks');
+  const sortedPostsQuery = await query(postsRef, orderByChild('score'));
+  
+  await get(sortedPostsQuery).then(async (snapshot) => {
+    if (snapshot.exists()) {
+      // Iterate through each child node
+      const snapshotArray = [];
+      snapshot.forEach((childSnapshot) => {
+        snapshotArray.push(childSnapshot);
       });
-      buttons.appendChild(details);
-      const upvote = document.createElement("button");
-      upvote.classList.add("upvote");
-      upvote.setAttribute("snack", snackId);
-      var voted = false;
-      var score;
-      await get(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + snackId)).then((snapshot) => {
-        if (snapshot.exists()) {
-          voted = snapshot.val().voted;
-        }
-      });
-      await get(ref(db, "snacks/" + snackId)).then((snapshot) => {
-        score = parseInt(snapshot.val().score);
-      });
-      upvote.innerHTML = "<i class='far " + ((voted) ? "fas" : "") + " fa-thumbs-up me-2'></i>" + score;
-      if (voted) {
-        upvote.classList.toggle('on');
-      }
-      upvote.addEventListener('click', async function(e) {
-        e.preventDefault();
-        const icon = this.querySelector('i');
-        const textNode = this.childNodes[1];
+  
+      // Iterate through each child node in reverse order
+      for (let i = snapshotArray.length - 1; i >= 0; i--) {
+        const childSnapshot = snapshotArray[i];
+        const snackId = childSnapshot.key;
+        const snack = childSnapshot.val();
+        const cardWrapper = document.createElement('div');
+        //change md-# to specify num columns
+        cardWrapper.classList.add('col-md-2');
+        const snackBody = document.createElement('div');
+        snackBody.classList.add('snack-card');
+        const snackCard = document.createElement('div');
+        snackCard.classList.add('card-body');
+        snackBody.appendChild(snackCard);
+        cardWrapper.appendChild(snackBody);
+        const snackName = document.createElement('h5');
+        snackName.classList.add("card-title");
+        snackName.innerHTML = snack.name;
+        snackCard.appendChild(snackName);
+        const snackType = document.createElement('p');
+        snackType.classList.add("card-text");
+        snackType.innerHTML = "Type: " + snack.type;
+        snackCard.appendChild(snackType);
+        const buttons = document.createElement("span");
+        const details = document.createElement("button");
+        details.classList.add("show-details");
+        details.setAttribute("snack", snackId);
+        details.innerHTML = "<i class='fas fa-info-circle me-2'></i>Details";
+        details.addEventListener('click', function(e) {
+          e.preventDefault();
+          const snackId = this.getAttribute('snack');
+          const snackDetails = document.getElementById(snackId + 'details');
+          snackDetails.classList.toggle('show');
+        });
+        buttons.appendChild(details);
+        const upvote = document.createElement("button");
+        upvote.classList.add("upvote");
+        upvote.setAttribute("snack", snackId);
+        var voted = false;
         var score;
-        await get(ref(db, "snacks/" + this.getAttribute('snack'))).then(async (snapshot) => {
+        await get(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + snackId)).then((snapshot) => {
+          if (snapshot.exists()) {
+            voted = snapshot.val().voted;
+          }
+        });
+        await get(ref(db, "snacks/" + snackId)).then((snapshot) => {
           score = parseInt(snapshot.val().score);
         });
-        if (this.classList.contains('on')) {
-          textNode.nodeValue = score - 1;
-          await update(ref(db, "snacks/" + this.getAttribute('snack')), {
-            score: score - 1
-          });
-          await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
-            voted : false
-          });
-          icon.classList.remove("fas");
+        upvote.innerHTML = "<i class='far " + ((voted) ? "fas" : "") + " fa-thumbs-up me-2'></i>" + score;
+        if (voted) {
+          upvote.classList.toggle('on');
         }
-        else {
-          textNode.nodeValue = score + 1;
-          await update(ref(db, "snacks/" + this.getAttribute('snack')), {
-            score: score + 1
+        upvote.addEventListener('click', async function(e) {
+          e.preventDefault();
+          const icon = this.querySelector('i');
+          const textNode = this.childNodes[1];
+          var score;
+          await get(ref(db, "snacks/" + this.getAttribute('snack'))).then(async (snapshot) => {
+            score = parseInt(snapshot.val().score);
           });
-          await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
-            voted : true
-          });
-          icon.classList.add("fas");
-        }
-        this.classList.toggle('on');
-      });
-      buttons.appendChild(upvote);
-      snackCard.appendChild(buttons);
-      const snackDescription = document.createElement('p');
-      snackDescription.classList.add("snack-details");
-      snackDescription.id = snackId + "details";
-      snackDescription.innerHTML = "Price Range: " + snack.price + "<br>Vendor Address: " + snack.address + "<br>Description: " + snack.description;
-      snackCard.appendChild(snackDescription);
-      container.appendChild()
-    });
-  }
-});
+          if (this.classList.contains('on')) {
+            textNode.nodeValue = score - 1;
+            await update(ref(db, "snacks/" + this.getAttribute('snack')), {
+              score: score - 1
+            });
+            await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
+              voted : false
+            });
+            icon.classList.remove("fas");
+          }
+          else {
+            textNode.nodeValue = score + 1;
+            await update(ref(db, "snacks/" + this.getAttribute('snack')), {
+              score: score + 1
+            });
+            await update(ref(db, "users/" + sessionStorage.getItem("currentUser") + "/snacks/" + this.getAttribute('snack')), {
+              voted : true
+            });
+            icon.classList.add("fas");
+          }
+          this.classList.toggle('on');
+        });
+        buttons.appendChild(upvote);
+        snackCard.appendChild(buttons);
+        const snackDescription = document.createElement('p');
+        snackDescription.classList.add("snack-details");
+        snackDescription.id = snackId + "details";
+        snackDescription.innerHTML = "Price Range: " + snack.price + "<br>Vendor Address: " + snack.address + "<br>Description: " + snack.description;
+        snackCard.appendChild(snackDescription);
+        container.appendChild(cardWrapper);
+      }
+    }
+  });
+}
+refresh();
 // Handle bike details toggle
 /*const showDetails = document.querySelectorAll('.show-details');
 showDetails.forEach(function(element) {
