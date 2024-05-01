@@ -1,5 +1,5 @@
 # Club-Hub
-Revolutionizing the education experience for students
+Revolutionizing the education experience for students 
 
 Created for [SummitHacks 2024](https://summit.devpost.com/)
 
