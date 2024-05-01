@@ -624,8 +624,8 @@ a.homer {
   top: 0;
   left: 0;
   z-index: -1;
-  width: 100%;
-  height: 100%;
+  width: 150%;
+  height: 150%;
   filter: brightness(20%); 
 }
 
