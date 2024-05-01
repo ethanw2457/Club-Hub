@@ -37,7 +37,7 @@ get(child(ref(db), 'users/' + sessionStorage.getItem("currentUser"))).then((snap
   }
   else {
     var array = snapshot.val().clubs || [];
-    if (!array.includes(sessionStorage.getItem("currentClub")))
+    if (!array.includes(parseInt(sessionStorage.getItem("currentClub"))))
       document.getElementById("createEvent").style.display = "none";
   }
 
