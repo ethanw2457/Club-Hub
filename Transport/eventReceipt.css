@@ -76,7 +76,7 @@ h2 {
 
 .col-2 {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;
   gap: 20px;
   width: 100%;
 }
@@ -335,10 +335,10 @@ h2 {
 
 .project-description {
   line-height: normal;
-  max-width: 200px;
   margin: 20px;
+  max-width: 1000px;
   position: absolute;
-  left: -250px;
+  left: -1000px;
   transition: 0.5s ease;
 }
 
